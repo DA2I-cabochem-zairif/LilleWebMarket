@@ -18,15 +18,17 @@ header{
 	h1{
 		position:absolute;
 		width:340px;
+		font-size: 2em;
 		text-align:center;
 		margin-top:50px;
 		font-family:"maFont";
 		text-align:center;
 		color:$blanc;
-		font-size:1.5em;
 		display:inline;
 	}
 	.infouser{
+		
+		font-family:"maFont";
 		margin-top:12px;	
 		float:right;
 		border-radius:5em;
@@ -124,4 +126,3 @@ footer{
 	height:125px;
 	color:$blanc;	
 }
-@include font-face("maFont", font-files("leftistmonoserif.woff","leftistmonoserif.ttf","leftistmonoserif.svg#LeftistMonoSansRegular","leftistmonoserif.eot"));

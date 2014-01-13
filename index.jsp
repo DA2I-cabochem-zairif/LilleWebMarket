@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <META http-equiv=Content-Type content="text/html">
     <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/font.css">
     <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/main.css">
   </HEAD>
   <BODY>
@@ -19,7 +20,7 @@
             <p><em>Maxime Caboche</em></p>
             <p><a href="#">Se deconnecter</a></p>
             <div class="raiting">
-              <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+              <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
           </div>
         </div>

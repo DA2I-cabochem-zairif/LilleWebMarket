@@ -1,0 +1,4 @@
+@font-face {
+  font-family: "maFont";
+  src: url('fonts/leftistmonoserif.woff') format('woff'), url('fonts/leftistmonoserif.ttf') format('truetype'), url('fonts/leftistmonoserif.svg#LeftistMonoSansRegular') format('svg'), url('fonts/leftistmonoserif.eot') format('embedded-opentype');
+}
