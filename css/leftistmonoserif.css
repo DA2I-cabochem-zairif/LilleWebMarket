@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'LeftistMonoSansRegular';
+    src: url('leftistmonoserif.eot');
+    src: url('leftistmonoserif.eot') format('embedded-opentype'),
+         url('leftistmonoserif.woff') format('woff'),
+         url('leftistmonoserif.ttf') format('truetype'),
+         url('leftistmonoserif.svg#LeftistMonoSansRegular') format('svg');
+}

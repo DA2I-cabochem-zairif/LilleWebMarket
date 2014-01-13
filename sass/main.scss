@@ -1,0 +1,127 @@
+@import "compass/css3";
+
+/* Vars */
+$bleuclair : rgb(000,169,224);
+$bleufonce : rgb(022,119,184);
+$noir 	   : rgb(026,023,023);
+$gris 	   : rgb(124,130,130);
+$blanc     : rgb(255,255,255);
+$okcolor   : rgb(048,125,035);
+$wrongcolor: rgb(229,008,008);
+
+header{
+	background-color:$bleuclair;
+	.wrap{
+		margin:auto;
+		width:950px;
+	}
+	h1{
+		position:absolute;
+		width:340px;
+		text-align:center;
+		margin-top:50px;
+		font-family:"maFont";
+		text-align:center;
+		color:$blanc;
+		font-size:1.5em;
+		display:inline;
+	}
+	.infouser{
+		margin-top:12px;	
+		float:right;
+		border-radius:5em;
+		border-bottom-right-radius:1em;
+		border-top-right-radius:1em;
+		background-color:$bleufonce;
+		color:$blanc;
+		width:300px;
+		height:100px;
+		position:relative;
+		img{
+			display:inline;
+			margin-top:3px;
+			margin-left:5px;
+			border-radius:50%;
+			border:2px solid $blanc;
+			@include single-box-shadow;
+		}
+		.user{
+			padding-left:25px;
+			padding-top:5px;
+			position:absolute;
+
+			display:inline;
+		}
+		p{
+			text-align:center;
+			font-size:0.9em;
+			padding:3px;
+			em{
+				font-size:1.1em;
+			}
+			a{
+				text-decoration:underline;
+				color:$blanc;
+				font-size:0.8em;
+			}
+		}
+		.raiting{
+			padding-left:5px;
+			position:absolute;	
+			ul{
+				margin:auto;
+				li{
+					float:left;
+					width:22px;
+					height:22px;
+					background:url('../img/stars.png') no-repeat;
+				}
+			}
+		}
+	}
+}
+
+article{
+	min-height: 380px;
+	.wrap{
+		margin:auto;
+		width:950px;
+	}
+	table{
+		margin:auto;
+		margin-top:25px;
+		border-collapse: collapse;	
+		border:1px solid black;
+		td{
+			padding :5px 10px;
+			border:1px solid black
+		}
+		th{
+			padding:5px;
+			font-size:2em;
+		}
+		tr{
+			font-size:0.9em;
+			text-align:center;
+		}
+		tr:nth-child(even){
+			background: #ccc;
+		}
+		tr:nth-child(odd){
+			background: #FFF;
+		}
+		.plus{
+			color:$okcolor;
+		}
+		.moins{
+			color:$wrongcolor;
+		}
+	}
+}
+
+footer{
+	background-color:$bleuclair;
+	height:125px;
+	color:$blanc;	
+}
+@include font-face("maFont", font-files("leftistmonoserif.woff","leftistmonoserif.ttf","leftistmonoserif.svg#LeftistMonoSansRegular","leftistmonoserif.eot"));
