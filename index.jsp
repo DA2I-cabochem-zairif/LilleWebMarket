@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<HTML>
-  <HEAD>
-    <TITLE>LilleWebMarket</TITLE>
+  <HTML lang="fr">
+  <head>
+    <title>LilleWebMarket</title>
     <meta charset="utf-8">
-    <META http-equiv=Content-Type content="text/html">
     <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/font.css">
     <link rel="stylesheet" type="text/css" href="<%out.print(request.getContextPath());%>/css/main.css">
-  </HEAD>
-  <BODY>
+  </head>
+  <body>
     <header>
       <div class="wrap">
         <img src="img/logo.png">
@@ -49,7 +48,9 @@
       </div>
     </article>
     <footer>
-      <!--<p>Cité Scientifique 59655 Villeneuve d'Ascq Cédex Tél. +33 (0) 3.20.43.43.32 | © DA2I</p>-->
+      <img src="img/DA2I.png" alt="logo DA2I">
+      <p><a href="#">Informations</a>&nbsp;|&nbsp;<a href="#">Mentions legales</a>&nbsp;|&nbsp;<a href="#">contact</a></p>
+      <p>Cité Scientifique 59655 Villeneuve d'Ascq Cédex Tél. +33 (0) 3.20.43.43.32 | © DA2I</p>
     </footer>
-  </BODY>
-</HTML>
+  </body>
+</html>

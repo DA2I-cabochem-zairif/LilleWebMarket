@@ -135,7 +135,25 @@ article table .moins {
 
 /* line 124, ../sass/main.scss */
 footer {
+  padding: 10px;
   background-color: #00a9e0;
-  height: 125px;
+  color: white;
+  text-align: center;
+}
+/* line 130, ../sass/main.scss */
+footer img {
+  height: 100px;
+  margin-bottom: 20px;
+}
+/* line 135, ../sass/main.scss */
+footer p {
+  padding: 5px;
+}
+/* line 138, ../sass/main.scss */
+footer a {
+  color: #1677b8;
+}
+/* line 141, ../sass/main.scss */
+footer :hover {
   color: white;
 }
