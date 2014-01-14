@@ -5,6 +5,19 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/erreur.jsp?message=Cette page ne vous est pas accessible</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/erreur.jsp?message=Page inexistante</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/erreur.jsp?message=BDD ou Beans inaccessibles</location>
+    </error-page>
+
     <display-name>Lille Web Market</display-name>
     <description>
     	LilleWebMarket est une application de Bourse d'information
