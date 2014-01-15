@@ -1,17 +1,11 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-	<title>Page d'erreur</title>
-        <%@ page
-               contentType="text/html; charset=ISO-8859-15" 
-	       isErrorPage="true" %>
-	<link rel="stylesheet" href="css/main.css" type="text/css">
-    </head>
-<body>
+<%@page pageEncoding="utf-8" %>
+<% session.setAttribute("page","Erreur"); %>
+<jsp:include page="partial/header.jsp"/>
+<%@ page contentType="text/html; charset=ISO-8859-15" isErrorPage="true" %>
 
 <article>
     <div class="wrap">
-        <h1> Page de gestion d'erreur</h1>
+        <h1>Un problème est survenue</h1>
         <p> Un probleme de type 
         <%
 	    String m = request.getParameter("message");
@@ -23,5 +17,5 @@
     </div>
     
 </article>
-</body>
-</html>
+
+<jsp:include page="partial/footer.jsp" />
