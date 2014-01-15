@@ -34,19 +34,22 @@ create table titre
 	constraint fk_utilisateur foreign key (iduser) references utilisateur(iduser) on update cascade
 );
 
-create table achatvente
-(
-	idachatvente serial,
-	prix integer,
-	constraint pk_achatvente primary key (idachatvente)
-);
-
 create table marche
 (
 	idmarche serial,
 	libelle text,
 	datefin date,
 	constraint pk_marche primary key (idmarche)
+);
+
+create table achatvente
+(
+	idachatvente serial,
+	prix integer,
+	quantite integer,
+	idmarche integer,
+	constraint pk_achatvente primary key (idachatvente),
+	constraint fk_marche foreign key (idmarche) references marche(idmarche) on update cascade
 );
 
 create table situation
@@ -80,3 +83,18 @@ create table transactions
 	constraint fk_achatvente foreign key (idachatvente) references achatvente(idachatvente) on update cascade
 );
 
+insert into utilisateur values (default, 'Souare', 'Pape', 'souarep', 'amoi', 10000);
+insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', 10000);
+
+insert into marche values (default, 'Lille gagnera son prochain match', '05-02-2014');
+insert into marche values (default, 'Au RU à midi ça sera mangeable', '12-02-2014');
+
+insert into titre values (default, 1, 'j achète');
+
+insert into achatvente values (default, 47, 61, 1);
+insert into achatvente values (default, 49, 5, 1);
+insert into achatvente values (default, 44, 563, 1);
+
+insert into achatvente values (default, 36, 395, 2);
+
+insert into transactions values (default, 1, 1);
