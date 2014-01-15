@@ -11,7 +11,7 @@
   <body>
     <header>
       <div class="wrap">
-        <img src="img/logo.png" alt="Logo-univ-lille1">
+       	<a href="<%= request.getContextPath() %>" alt="Accueil"><img src="img/logo.png" alt="Logo-univ-lille1"></a>
         <h1>Lille Web Market</h1>
         <div class="infouser">
           <img src="http://lorempixel.com/90/90/" alt="photo">
