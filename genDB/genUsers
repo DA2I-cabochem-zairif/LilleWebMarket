@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+
+for($i=1;$i<=$ARGV[0];$i++){
+    print "$i;nom$i;prenom$i;login$i;mdp$i;20000\n";
+}
