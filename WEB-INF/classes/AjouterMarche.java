@@ -4,8 +4,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
-@WebServlet("/SelectInfoMarche")
-public class SelectInfoMarche extends HttpServlet
+@WebServlet("/AjouterMarche")
+public class AjouterMarche extends HttpServlet
 {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
@@ -24,34 +24,25 @@ public class SelectInfoMarche extends HttpServlet
 	    
 	    // Création de l'état
 	    Statement state = con.createStatement();
-	    
-	    // Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
-	    String iddemande = req.getParameter("marche");
-	    String query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" order by av.prix desc;";
-	    
-	    ResultSet rs = state.executeQuery(query);
-	    int nbColumn = rs.getMetaData().getColumnCount();
 	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
 	    out.println("<article><div class=\"wrap\">");
-	    out.println("<h1>Ma table : </h1>");
-	    out.println("<table>");
-	    out.println("<tr>");
-	    ResultSetMetaData rsmd = rs.getMetaData();
-	    for (int i = 1 ; i <= nbColumn ; i++)
+	    if (req.getParameter("libelle").equals("") || req.getParameter("inverse").equals("") || req.getParameter("dateFin").equals(""))
 	    {
-		out.println("<td>"+rsmd.getColumnName(i)+"</td>");
+		out.println("<p>Go kill yourself</p>");
 	    }
-	    out.println("</tr>");
-	    while (rs.next())
+	    else
 	    {
-		out.println("<tr>");
-		for (int i = 1 ; i <= nbColumn ; i++)
-		    out.println("<td>"+rs.getString(i)+"</td>");
-		out.println("</tr><tr>");
+		String query = "insert into marche values (default, ?, ?, '"+req.getParameter("dateFin")+"');";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setString(1, req.getParameter("libelle"));
+		ps.setString(2, req.getParameter("inverse"));
+		ps.executeUpdate();
+		PreparedStatement ps2 = con.preparedStatement("select max(idmarche) from marche;");
+		String lastId = 
+		out.println("<p><a href=\"#\">Voir ce marche marché</a></p>");
 	    }
-	    out.println("</table>");
-	    out.println("<p><a href=\"SelectInfoMarcheInverse?marche="+iddemande+"\">Marché inverse</a></p>");
 	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
+	    out.println("<p><a href=\"formMarche.jsp\">Ajouter un nouveau marché</a></p>");
 	    out.println("</div></article>");
 	    out.println("</body></html>");
 	}

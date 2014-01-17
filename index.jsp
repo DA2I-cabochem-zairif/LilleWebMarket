@@ -1,65 +1,33 @@
 <%@page pageEncoding="utf-8" %>
+<%@ page import="java.sql.*" errorPage="erreur.jsp" %>
 <% session.setAttribute("page","Index"); %>
-<jsp:include page="header.jsp"/>
+<jsp:include page="partial/header.jsp"/>
+  <head><link rel="stylesheet" type="text/css" href="css/main.css"></head>
     <article>
       <div class="wrap">
         <h1>Lille Web Market</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p></p>
         <table>
-          <tr>
-            <th>Informations</th>
-            <th>Cote</th>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="plus">+0.5</td>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="moins">-3</td>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="plus">+12</td>
-          </tr>
+          <%
+	Class.forName(getServletContext().getInitParameter("driver"));
+	
+	String url = getServletContext().getInitParameter("url");
+	String user = getServletContext().getInitParameter("user");
+	String mdp = getServletContext().getInitParameter("mdp");
+	
+	Connection con = DriverManager.getConnection(url,user, mdp);
+	Statement stmt= con.createStatement();
+        PreparedStatement ps = con.prepareStatement("select * from marche;");
+        ResultSet rs = ps.executeQuery();
+	%><center><h3>Liste des marchés :</h3></center><%
+        while (rs.next())
+        {
+	    %> <p><a href='SelectInfoMarche?marche=<%= rs.getString("idmarche")%>' > <%= rs.getString("libelle") %></a></p> <%
+	}
+	con.close();
+      %>
         </table>
-
+	<p><a href="formMarche.jsp">Ajouter un marché</a></p>
       </div>
     </article>
-        <article>
-      <div class="wrap">
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <table>
-          <tr>
-            <th>Informations</th>
-            <th>Cote</th>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="plus">+0.5</td>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="moins">-3</td>
-          </tr>
-          <tr>
-            <td><a href="#">Fouad respectera W3C avant mars</a></td>
-            <td class="plus">+12</td>
-          </tr>
-        </table>
-
-      </div>
-    </article>
-
-<jsp:include page="footer.jsp"/>
+<jsp:include page="partial/footer.jsp"/>

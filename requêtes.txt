@@ -1,0 +1,5 @@
+Requête qui récupère le marché dont l'id est iddemande :
+String query = "select m.libelle, av.prix, av.quantite from achatvente av join marche m on m.idmarche = av.idmarche where m.idmarche = 2;";
+	    
+Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
+String query = "select u.iduser, u.login, t.idtitre, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = iddemande;";

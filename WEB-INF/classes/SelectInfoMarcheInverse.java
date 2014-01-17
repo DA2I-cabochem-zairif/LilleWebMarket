@@ -4,8 +4,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
-@WebServlet("/SelectInfoMarche")
-public class SelectInfoMarche extends HttpServlet
+@WebServlet("/SelectInfoMarcheInverse")
+public class SelectInfoMarcheInverse extends HttpServlet
 {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
@@ -27,7 +27,7 @@ public class SelectInfoMarche extends HttpServlet
 	    
 	    // Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
 	    String iddemande = req.getParameter("marche");
-	    String query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" order by av.prix desc;";
+	    String query = "select u.iduser, u.login, m.idmarche, m.inverse, 100 - av.prix as prixinverse, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" order by prixinverse desc;";
 	    
 	    ResultSet rs = state.executeQuery(query);
 	    int nbColumn = rs.getMetaData().getColumnCount();
@@ -50,7 +50,7 @@ public class SelectInfoMarche extends HttpServlet
 		out.println("</tr><tr>");
 	    }
 	    out.println("</table>");
-	    out.println("<p><a href=\"SelectInfoMarcheInverse?marche="+iddemande+"\">Marché inverse</a></p>");
+	    out.println("<p><a href=\"SelectInfoMarche?marche="+iddemande+"\">Marché inverse</a></p>");
 	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
 	    out.println("</div></article>");
 	    out.println("</body></html>");
