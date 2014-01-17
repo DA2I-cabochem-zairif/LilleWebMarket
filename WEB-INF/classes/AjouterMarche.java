@@ -37,9 +37,11 @@ public class AjouterMarche extends HttpServlet
 		ps.setString(1, req.getParameter("libelle"));
 		ps.setString(2, req.getParameter("inverse"));
 		ps.executeUpdate();
-		PreparedStatement ps2 = con.preparedStatement("select max(idmarche) from marche;");
-		String lastId = 
-		out.println("<p><a href=\"#\">Voir ce marche marché</a></p>");
+		PreparedStatement ps2 = con.prepareStatement("select max(idmarche) from marche;");
+		ResultSet rs2 = ps2.executeQuery();
+		rs2.next();
+		String lastId = rs2.getString("max");
+		out.println("<p><a href=\"SelectInfoMarche?marche="+lastId+"\">Voir ce marché</a></p>");
 	    }
 	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
 	    out.println("<p><a href=\"formMarche.jsp\">Ajouter un nouveau marché</a></p>");

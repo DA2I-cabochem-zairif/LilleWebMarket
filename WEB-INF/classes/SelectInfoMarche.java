@@ -52,6 +52,16 @@ public class SelectInfoMarche extends HttpServlet
 	    out.println("</table>");
 	    out.println("<p><a href=\"SelectInfoMarcheInverse?marche="+iddemande+"\">Marché inverse</a></p>");
 	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
+	    out.println("</div></article><article><div class=\"wrap\">");
+	    out.println("<h3>Ajouter une offre</h3>");
+	    out.println("<form method=\"post\" action=\"AjouterOffre\">");
+	    out.println("<p><label for=\"quantite\">Nombre de bons :</label>");
+	    out.println("<input type=\"text\" name=\"quantite\" id=\"quantite\" /></p>");
+	    out.println("<p><label for=\"prix\">Prix du bon :</label>");
+	    out.println("<input type=\"text\" name=\"prix\" id=\"prix\" /></p>");
+	    out.println("<input type=\"hidden\" name=\"idmarche\" id=\"idmarche\" value=\""+req.getParameter("marche")+"\" />");
+	    out.println("<p><input type=\"submit\" value=\"Ajouter l'offre\"></p>");
+	    out.println("</form>");
 	    out.println("</div></article>");
 	    out.println("</body></html>");
 	}
