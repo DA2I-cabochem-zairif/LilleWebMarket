@@ -38,6 +38,7 @@ create table marche
 (
 	idmarche serial,
 	libelle text,
+	inverse text,
 	datefin date,
 	constraint pk_marche primary key (idmarche)
 );
@@ -86,10 +87,13 @@ create table transactions
 insert into utilisateur values (default, 'Souare', 'Pape', 'souarep', 'amoi', 10000);
 insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', 10000);
 
-insert into marche values (default, 'Lille gagnera son prochain match', '05-02-2014');
-insert into marche values (default, 'Au RU à midi ça sera mangeable', '12-02-2014');
+insert into marche values (default, 'Lille gagnera son prochain match', 'Lille fera match nul ou perdra son prochain match', '05-02-2014');
+insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Au UR le soir ça sera dégueu', '12-02-2014');
 
 insert into titre values (default, 1, 'j achète');
+insert into titre values (default, 1, 'j achète un autre titre');
+insert into titre values (default, 2, 'lol');
+insert into titre values (default, 2, 'test');
 
 insert into achatvente values (default, 47, 61, 1);
 insert into achatvente values (default, 49, 5, 1);
@@ -98,3 +102,6 @@ insert into achatvente values (default, 44, 563, 1);
 insert into achatvente values (default, 36, 395, 2);
 
 insert into transactions values (default, 1, 1);
+insert into transactions values (default, 2, 2);
+insert into transactions values (default, 3, 3);
+insert into transactions values (default, 4, 4);
