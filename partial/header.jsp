@@ -17,8 +17,8 @@
           <img src="http://lorempixel.com/90/90/" alt="photo">
           <div class="user">
             <p>Bienvenue</p>
-            <p><em>Maxime Caboche</em></p>
-            <p><a href="#">Se deconnecter</a></p>
+            <p><em>${prenom} ${nom}</em></p>
+            <p><a href="login.jsp">Se deconnecter</a></p>
             <div class="raiting">
               <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
