@@ -30,6 +30,7 @@ public class AjouterOffreInverse extends HttpServlet
 	    int apayer = prix * quantite;
 	    int iduser = Integer.parseInt((String)session.getAttribute("iduser"));
 	    int cash = (Integer)session.getAttribute("cash");
+	    int idmarche = Integer.parseInt(req.getParameter("idmarche"));
 	    boolean riche = apayer <= cash;
 	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche)
 	    {
@@ -37,16 +38,27 @@ public class AjouterOffreInverse extends HttpServlet
 	    }
 	    else
 	    {
+		String offresAchetables = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and av.prix <= ? order by av.prix asc;";
+		PreparedStatement psachetable = con.prepareStatement(offresAchetables);
+		psachetable.setInt(1, idmarche);
+		psachetable.setInt(2, prix);
+		ResultSet rsachetables = psachetable.executeQuery();
+		while (rsachetables.next() && quantite > 0)
+		{
+			out.println("<p> prix : "+rsachetables.getInt("prix")+" | quantité : "+rsachetables.getInt("quantite")+"</p>");
+			quantite -= rsachetables.getInt("quantite");
+			//int acheter = ?;
+		}
 		String query = "insert into titre values (default, ?, 'achat');";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, iduser);
-		ps.executeUpdate();
+		//ps.executeUpdate();
 		String query2 = "insert into achatvente values (default, ?, ?, ?);";
 		PreparedStatement ps2 = con.prepareStatement(query2);
 		ps2.setInt(1, 100 - Integer.parseInt(req.getParameter("prix")));
 		ps2.setInt(2, Integer.parseInt(req.getParameter("quantite")));
 		ps2.setInt(3, Integer.parseInt(req.getParameter("idmarche")));
-		ps2.executeUpdate();
+		//ps2.executeUpdate();
 		String query3 = "insert into transactions values (default, ?, ?);";
 		PreparedStatement ps3 = con.prepareStatement(query3);
 		PreparedStatement ps4 = con.prepareStatement("select max(idtitre) from titre;");
@@ -59,16 +71,16 @@ public class AjouterOffreInverse extends HttpServlet
 		String idachatvente = rs3.getString("max");
 		ps3.setInt(1, Integer.parseInt(idtitre));
 		ps3.setInt(2, Integer.parseInt(idachatvente));
-		ps3.executeUpdate();
+		//ps3.executeUpdate();
 		int somme = cash - apayer;
 		String query6 = "update utilisateur set cash = ? where iduser = ? ;";
 		PreparedStatement ps6 = con.prepareStatement(query6);
 		ps6.setInt(1, somme);
 		ps6.setInt(2, iduser);
-		ps6.executeUpdate();
+		//ps6.executeUpdate();
 		session.setAttribute("cash", somme);
 	    }
-	    res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
+	    //res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
 	}
 	catch (Exception e)
 	{

@@ -14,7 +14,7 @@ create table utilisateur
 	prenom varchar(30),
 	login varchar(30),
 	mdp varchar(30),
-	cash integer DEFAULT 10000,
+	cash integer DEFAULT 1000000,
 	constraint pk_utilisateur primary key (iduser)
 );
 
@@ -84,8 +84,8 @@ create table transactions
 	constraint fk_achatvente foreign key (idachatvente) references achatvente(idachatvente) on update cascade
 );
 
-insert into utilisateur values (default, 'Souare', 'Pape', 'souarep', 'amoi', 10000);
-insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', 10000);
+insert into utilisateur values (default, 'Souare', 'Pape', 'souarep', 'amoi', default);
+insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', default);
 
 insert into marche values (default, 'Lille gagnera son prochain match', 'Lille fera match nul ou perdra son prochain match', '05-02-2014');
 insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Au UR le soir ça sera dégueu', '12-02-2014');
