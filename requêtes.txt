@@ -3,3 +3,6 @@ String query = "select m.libelle, av.prix, av.quantite from achatvente av join m
 	    
 Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
 String query = "select u.iduser, u.login, t.idtitre, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = iddemande;";
+
+Requête pour le marché inverse
+select u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = 1 and av.prix <= 70 order by av.prix asc limit 3;

@@ -35,7 +35,7 @@ public class AjouterOffre extends HttpServlet
 	    ResultSet c = gc.executeQuery();
 	    c.next();
 	    boolean riche = apayer <= c.getInt("cash");*/
-	    int cash = Integer.parseInt((String)session.getAttribute("cash"));
+	    int cash = (Integer)session.getAttribute("cash");
 	    boolean riche = apayer <= cash;
 	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche)
 	    {

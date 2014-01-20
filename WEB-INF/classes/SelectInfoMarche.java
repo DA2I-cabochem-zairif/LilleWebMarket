@@ -35,7 +35,7 @@ public class SelectInfoMarche extends HttpServlet
 	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
 	    out.println("<article><div class=\"wrap\">");
 	    out.println("<h1>Ma table : </h1>");
-	    out.println("Cash : "+session.getAttribute("cash"));
+	    out.println("<p>Cash : "+session.getAttribute("cash")+"</p>");
 	    out.println("<table>");
 	    out.println("<tr>");
 	    ResultSetMetaData rsmd = rs.getMetaData();
