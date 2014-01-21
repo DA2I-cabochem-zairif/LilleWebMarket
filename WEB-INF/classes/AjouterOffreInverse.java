@@ -43,13 +43,14 @@ public class AjouterOffreInverse extends HttpServlet
 	    }
 	    else
 	    {
-		String offresAchetables = "select av.idachatvente, u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and ? >= 100 - av.prix order by av.prix desc;";
+		String offresAchetables = "select tr.idtransaction, av.idachatvente, u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and ? >= 100 - av.prix order by av.prix desc;";
 		PreparedStatement psachetable = con.prepareStatement(offresAchetables);
 		psachetable.setInt(1, idmarche);
 		psachetable.setInt(2, prix);
 		ResultSet rsachetables = psachetable.executeQuery();
 		while (rsachetables.next() && quantite > 0)
 		{
+		    int idtransaction = rsachetables.getInt("idtransaction");
 		    int disponible = rsachetables.getInt("quantite");
 		    int idachatvente = rsachetables.getInt("idachatvente");
 		    int idpossesseur = rsachetables.getInt("iduser");
@@ -60,53 +61,62 @@ public class AjouterOffreInverse extends HttpServlet
 		    cashpossesseur = rscashvendeur.getInt("cash");
 		    int prixunitaire = 100 - rsachetables.getInt("prix");
 		    out.println("<p> prix : "+prixunitaire+" | quantité : "+disponible+" | possedés par "+idpossesseur+"</p>");
+		    int prixAPayer = quantite * prixunitaire;
+		    String reqVente = "delete from achatvente where idachatvente = ? ;";
+		    String reqCash = "update utilisateur set cash = ? where iduser = ?";
+		    PreparedStatement psCash = con.prepareStatement(reqCash);
 		    if (quantite < disponible)
 		    {
-			out.println("<p>On demande "+quantite+" bons</p>");
-			out.println("<p>On offre "+disponible+" bons</p>");
-			quantite = 0;
 			disponible -= quantite;
-			String reqVente = "update achatvente set quantite = ? where idachatvente = ? ;";
-			String reqCash = "update utilisateur set cash = ? where iduser = ?";
+			quantite = 0;
+			reqVente = "update achatvente set quantite = ? where idachatvente = ? ;";
+			int recu = cashpossesseur + prixAPayer;
+			psCash.setInt(1, recu);
+			psCash.setInt(2, idpossesseur);
+			psCash.executeUpdate();
+			int du = cash - prixAPayer;
+			psCash.setInt(1, du);
+			psCash.setInt(2, iduser);
+			psCash.executeUpdate();
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, disponible);
 			vendre.setInt(2, idachatvente);
-			//vendre.executeUpdate();
-			out.println(reqCash);
-			out.println("<p>1 : "+disponible+"</p>");
-			out.println("<p>2 : "+idachatvente+"</p>");
+			vendre.executeUpdate();
 		    }
 		    else if (quantite == disponible)
 		    {
-			int prixAPayer = quantite;
-			out.println("<p>On demande "+quantite+" bons</p>");
-			out.println("<p>On offre "+disponible+" bons</p>");
 			quantite = 0;
 			disponible = 0;
-			String reqCash = "update utilisateur set cash = ? where iduser = ?";
-			PreparedStatement psCash = con.prepareStatement(reqCash);
-			psCash.setInt(1, cashpossesseur);
-			psCash.setInt(2, );
-			String reqVente = "delete from achatvente where idachatvente = ? ;";
+			int recu = cashpossesseur + prixAPayer;
+			psCash.setInt(1, recu);
+			psCash.setInt(2, idpossesseur);
+			psCash.executeUpdate();
+			int du = cash - prixAPayer;
+			psCash.setInt(1, du);
+			psCash.setInt(2, iduser);
+			psCash.executeUpdate();
+			con.prepareStatement("delete from transactions where idtransaction = "+idtransaction+" ;").executeUpdate();
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, idachatvente);
-			//vendre.executeUpdate();
-			out.println(reqCash);
-			out.println("<p>1 : "+idachatvente+"</p>");
+			vendre.executeUpdate();
 		    }
 		    else
 		    {
-			out.println("<p>On demande "+quantite+" bons</p>");
-			out.println("<p>On offre "+disponible+" bons</p>");
+			prixAPayer = disponible * prixunitaire;
 			quantite -= disponible;
 			disponible = 0;
-			String reqCash = "update utilisateur set cash = ? where iduser = ?";
-			String reqVente = "delete from achatvente where idachatvente = ? ;";
+			int recu = cashpossesseur + prixAPayer;
+			psCash.setInt(1, recu);
+			psCash.setInt(2, idpossesseur);
+			psCash.executeUpdate();
+			int du = cash - prixAPayer;
+			psCash.setInt(1, du);
+			psCash.setInt(2, iduser);
+			psCash.executeUpdate();
+			con.prepareStatement("delete from transactions where idtransaction = "+idtransaction+" ;").executeUpdate();
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, idachatvente);
-			//vendre.executeUpdate();
-			out.println(reqCash);
-			out.println("<p>1 : "+idachatvente+"</p>");
+			vendre.executeUpdate();
 		    }
 		}
 		String query = "insert into titre values (default, ?, 'achat');";
@@ -140,7 +150,7 @@ public class AjouterOffreInverse extends HttpServlet
 		//ps6.executeUpdate();
 		//session.setAttribute("cash", somme);
 	    }
-	    //res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
+	    res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
 	}
 	catch (Exception e)
 	{
