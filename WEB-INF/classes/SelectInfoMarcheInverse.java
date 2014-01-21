@@ -28,7 +28,7 @@ public class SelectInfoMarcheInverse extends HttpServlet
 	    
 	    // Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
 	    String iddemande = req.getParameter("marche");
-	    String query = "select u.iduser, u.login, m.idmarche, m.inverse, 100 - av.prix as prixinverse, av.quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" order by prixinverse desc;";
+	    String query = "select u.iduser, u.login, m.idmarche, m.inverse, 100 - av.prix as prixinverse, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" group by u.iduser, u.login, m.idmarche, m.inverse, prixinverse order by prixinverse desc;";
 	    
 	    ResultSet rs = state.executeQuery(query);
 	    int nbColumn = rs.getMetaData().getColumnCount();
