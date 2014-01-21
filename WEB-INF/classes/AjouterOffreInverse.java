@@ -53,6 +53,11 @@ public class AjouterOffreInverse extends HttpServlet
 		    int disponible = rsachetables.getInt("quantite");
 		    int idachatvente = rsachetables.getInt("idachatvente");
 		    int idpossesseur = rsachetables.getInt("iduser");
+		    int cashpossesseur = 0;
+		    PreparedStatement pscashvendeur = con.prepareStatement("select cash from utilisateur where iduser = "+idpossesseur);
+		    ResultSet rscashvendeur = pscashvendeur.executeQuery();
+		    rscashvendeur.next();
+		    cashpossesseur = rscashvendeur.getInt("cash");
 		    int prixunitaire = 100 - rsachetables.getInt("prix");
 		    out.println("<p> prix : "+prixunitaire+" | quantité : "+disponible+" | possedés par "+idpossesseur+"</p>");
 		    if (quantite < disponible)
@@ -62,25 +67,31 @@ public class AjouterOffreInverse extends HttpServlet
 			quantite = 0;
 			disponible -= quantite;
 			String reqVente = "update achatvente set quantite = ? where idachatvente = ? ;";
+			String reqCash = "update utilisateur set cash = ? where iduser = ?";
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, disponible);
 			vendre.setInt(2, idachatvente);
 			//vendre.executeUpdate();
-			out.println(reqVente);
+			out.println(reqCash);
 			out.println("<p>1 : "+disponible+"</p>");
 			out.println("<p>2 : "+idachatvente+"</p>");
 		    }
 		    else if (quantite == disponible)
 		    {
+			int prixAPayer = quantite;
 			out.println("<p>On demande "+quantite+" bons</p>");
 			out.println("<p>On offre "+disponible+" bons</p>");
 			quantite = 0;
 			disponible = 0;
+			String reqCash = "update utilisateur set cash = ? where iduser = ?";
+			PreparedStatement psCash = con.prepareStatement(reqCash);
+			psCash.setInt(1, cashpossesseur);
+			psCash.setInt(2, );
 			String reqVente = "delete from achatvente where idachatvente = ? ;";
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, idachatvente);
 			//vendre.executeUpdate();
-			out.println(reqVente);
+			out.println(reqCash);
 			out.println("<p>1 : "+idachatvente+"</p>");
 		    }
 		    else
@@ -89,11 +100,12 @@ public class AjouterOffreInverse extends HttpServlet
 			out.println("<p>On offre "+disponible+" bons</p>");
 			quantite -= disponible;
 			disponible = 0;
+			String reqCash = "update utilisateur set cash = ? where iduser = ?";
 			String reqVente = "delete from achatvente where idachatvente = ? ;";
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, idachatvente);
 			//vendre.executeUpdate();
-			out.println(reqVente);
+			out.println(reqCash);
 			out.println("<p>1 : "+idachatvente+"</p>");
 		    }
 		}
