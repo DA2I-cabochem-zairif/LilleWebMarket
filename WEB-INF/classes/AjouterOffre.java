@@ -29,17 +29,14 @@ public class AjouterOffre extends HttpServlet
 	    int quantite = Integer.parseInt(req.getParameter("quantite"));
 	    int apayer = prix * quantite;
 	    int iduser = Integer.parseInt((String)session.getAttribute("iduser"));
-	    /*String getcash = "select cash from utilisateur where iduser = ?";
-	    PreparedStatement gc = con.preparedStatement(getcash);
-	    gc.setInt(1, iduser);
-	    ResultSet c = gc.executeQuery();
-	    c.next();
-	    boolean riche = apayer <= c.getInt("cash");*/
-	    int cash = Integer.parseInt((String)session.getAttribute("cash"));
+	    int cash = 0;
+	    ResultSet rsCash = con.prepareStatement("select cash from utilisateur where iduser = "+iduser+" ;").executeQuery();
+	    rsCash.next();
+	    cash = rsCash.getInt("cash");	
 	    boolean riche = apayer <= cash;
 	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche)
 	    {
-		out.println("<p>Go kill yourself</p>");
+		res.sendRedirect("SelectInfoMarche?marche="+req.getParameter("idmarche"));
 	    }
 	    else
 	    {
