@@ -22,7 +22,16 @@
 	     %><center><h3>Liste des marchés :</h3></center><%
         while (rs.next())
         {
-	    %> <p><a href='<%= request.getContextPath() %>/SelectInfoMarche?marche=<%= rs.getString("idmarche")%>' > <%= rs.getString("libelle") %></a></p> <%
+	    %>
+	  <form method="post" action='<%= request.getContextPath() %>/FermerMarche'>
+	  <p>
+	    <a href='<%= request.getContextPath() %>/SelectInfoMarche?marche=<%= rs.getString("idmarche")%>' > <%= rs.getString("libelle") %></a>
+	      <input type="hidden" id="idmarche" name="idmarche" value='<%= rs.getString("idmarche")%>' />
+	      <input type="hidden" id="resultat" name="resultat" value="gagne" />
+	      <input type="submit" value="Fermer ce marché" />
+	  </p>
+	  </form>
+	    <%
 	}
 	con.close();
       %>

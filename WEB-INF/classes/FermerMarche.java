@@ -24,8 +24,23 @@ public class FermerMarche extends HttpServlet
 	    con = DriverManager.getConnection(url, user, mdp);
 	    
 	    Statement state = con.createStatement();
+	    int idmarche = Integer.parseInt(req.getParameter("idmarche"));
+	    boolean gagne = req.getParameter("resultat").equals("gagne");
+	    String ReqGagnants = "select u.iduser, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and (t.description = 'achat' or t.description = 'vendu') group by u.iduser;";
+	    PreparedStatement psGagnants = con.prepareStatement(ReqGagnants);
+	    psGagnants.setInt(1, idmarche);
+	    ResultSet rsGagnants = psGagnants.executeQuery();
+	    while (rsGagnants.next())
+	    {
+		int iduser = rsGagnants.getInt("iduser");
+		int quantite = rsGagnants.getInt("quantite");
+		int gain = quantite * 100;
+		ResultSet rsCashUser = con.prepareStatement("select cash from utilisateur where iduser = "+iduser+" ;").executeQuery();
+		rsCashUser.next();
+		int cashUser = rsCashUser.getInt("cash") + gain;
+		con.prepareStatement("update utilisateur set cash = "+cashUser+" where iduser = "+iduser+" ;").executeUpdate();
+	    }
 	    
-	    res.sendRedirect("/users/index.jsp");
 	}
 	catch (Exception e)
 	{

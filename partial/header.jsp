@@ -18,7 +18,7 @@
           <div class="user">
             <p>Bienvenue</p>
             <p><em>${prenom} ${nom}</em></p>
-            <p><a href="../deconnexion.jsp">Se deconnecter</a></p>
+            <p><a href="../users/deconnexion.jsp">Se deconnecter</a></p>
             <div class="raiting">
               <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
