@@ -83,7 +83,7 @@ public class AjouterOffreInverse extends HttpServlet
 			vendre.setInt(2, idachatvente);
 			vendre.executeUpdate();
 			out.println("1");
-			con.prepareStatement("insert into titre values (default, "+iduser+", 'vente') ;").executeUpdate();
+			con.prepareStatement("insert into titre values (default, "+iduser+", 'vendu') ;").executeUpdate();
 			ResultSet rsTitre = con.prepareStatement("select max(idtitre) from titre ;").executeQuery();
 			rsTitre.next();
 			int lastIdTitre = rsTitre.getInt("max");
@@ -106,7 +106,7 @@ public class AjouterOffreInverse extends HttpServlet
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
 			out.println("2");
-			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vente' where idtitre = "+idtitre+" ;").executeUpdate();
+			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vendu' where idtitre = "+idtitre+" ;").executeUpdate();
 		    }
 		    else
 		    {
@@ -124,7 +124,7 @@ public class AjouterOffreInverse extends HttpServlet
 			psCash.executeUpdate();
 			out.println("3");
 			con.prepareStatement("update achatvente set quantite = "+restant+" where idachatvente = "+idachatvente+" ;").executeUpdate();
-			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vente' where idtitre = "+idtitre+" ;").executeUpdate();
+			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vendu' where idtitre = "+idtitre+" ;").executeUpdate();
 		    }
 		}
 		if (quantite > 0)

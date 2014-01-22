@@ -2,8 +2,8 @@
 
 <Resource name="madb" auth="Container" type="javax.sql.DataSource"
   maxActive="8" maxIdle="4" maxWait="10000"
-  username="maxime" password="moi" driverClassName="org.postgresql.Driver"
-  url="jdbc:postgresql://localhost/maxime" />
+  username="fouad" password="moi" driverClassName="org.postgresql.Driver"
+  url="jdbc:postgresql://localhost/da2i" />
 
 
 </Context>
