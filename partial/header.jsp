@@ -11,14 +11,14 @@
   <body>
     <header>
       <div class="wrap">
-       	<a href="<%= request.getContextPath() %>" alt="Accueil"><img src="img/logo.png" alt="Logo-univ-lille1"></a>
+       	<a href="<%= request.getContextPath() %>" alt="Accueil"><img src="<%= request.getContextPath() %>/img/logo.png" alt="Logo-univ-lille1"></a>
         <h1>Lille Web Market</h1>
         <div class="infouser">
           <img src="http://lorempixel.com/90/90/" alt="photo">
           <div class="user">
             <p>Bienvenue</p>
             <p><em>${prenom} ${nom}</em></p>
-            <p><a href="login.jsp">Se deconnecter</a></p>
+            <p><a href="../deconnexion.jsp">Se deconnecter</a></p>
             <div class="raiting">
               <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>

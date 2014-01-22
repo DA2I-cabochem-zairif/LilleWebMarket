@@ -43,8 +43,8 @@ public class AjouterMarche extends HttpServlet
 		String lastId = rs2.getString("max");
 		out.println("<p><a href=\"SelectInfoMarche?marche="+lastId+"\">Voir ce marché</a></p>");
 	    }
-	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
-	    out.println("<p><a href=\"formMarche.jsp\">Ajouter un nouveau marché</a></p>");
+	    out.println("<p><a href=\"users/index.jsp\">Retour à la liste des marchés</a></p>");
+	    out.println("<p><a href=\"users/formMarche.jsp\">Ajouter un nouveau marché</a></p>");
 	    out.println("</div></article>");
 	    out.println("</body></html>");
 	}

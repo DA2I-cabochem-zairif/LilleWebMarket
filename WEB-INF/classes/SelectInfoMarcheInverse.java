@@ -78,7 +78,7 @@ public class SelectInfoMarcheInverse extends HttpServlet
 	    out.println("</table>");
 	    
 	    out.println("<p><a href=\"SelectInfoMarche?marche="+iddemande+"\">Marché inverse</a></p>");
-	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
+	    out.println("<p><a href=\"users/index.jsp\">Retour à la liste des marchés</a></p>");
 	    out.println("</div></article><article><div class=\"wrap\">");
 	    out.println("<h3>Acheter une offre</h3>");
 	    out.println("<form method=\"post\" action=\"AjouterOffreInverse\">");

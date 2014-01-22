@@ -12,3 +12,6 @@ select av.idachatvente, u.iduser, u.login, m.idmarche, m.libelle, av.prix, av.qu
 
 Permet de récupérer les titres vendus, avec l'utilisateur correspondant et son cash :
 select ti.idtitre, ti.iduser, u.login, u.cash from titre ti, utilisateur u where ti.iduser = u.iduser and ti.description = 'vendu';
+
+A Appeller lors de la fermeture d'un marché, liste chaque joueur avec son nombre de bons à créditer en multipliant par 100 :
+select u.iduser, u.login, m.idmarche, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = 1 and (t.description = 'achat' or t.description = 'vendu') group by u.iduser, u.login, m.idmarche;

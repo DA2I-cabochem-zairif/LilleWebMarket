@@ -43,7 +43,7 @@ public class Login extends HttpServlet
 		session.setAttribute("nom", rs.getString("nom"));
 		session.setAttribute("prenom", rs.getString("prenom"));
 		session.setAttribute("cash", rs.getString("cash"));
-		res.sendRedirect(req.getContextPath()+"/index.jsp");
+		res.sendRedirect(req.getContextPath()+"/users/index.jsp");
 	    }
 	    else
 	    {
