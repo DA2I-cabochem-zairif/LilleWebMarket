@@ -3,6 +3,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
+import javax.sql.*;
+import javax.naming.*;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet
@@ -16,13 +18,17 @@ public class Login extends HttpServlet
 	try
 	{
 	    Class.forName(getServletContext().getInitParameter("driver"));
-	    
+	    /*
 	    String url = getServletContext().getInitParameter("url");
 	    String user = getServletContext().getInitParameter("user");
 	    String mdp = getServletContext().getInitParameter("mdp");
-	    
-	    con = DriverManager.getConnection(url, user, mdp);
-	    
+	    */
+
+	    Context initCtx = new InitialContext();
+	    Context envCtx  = (Context) initCtx.lookup("java:comp/env");
+	    DataSource ds   = (DataSource) envCtx.lookup("madb");
+	    //con = DriverManager.getConnection(url, user, mdp);
+	    con = ds.getConnection();
 	    Statement stmt = con.createStatement();
 	    
 	    PreparedStatement ps = con.prepareStatement("select * from utilisateur where login = ? and mdp = ?");
