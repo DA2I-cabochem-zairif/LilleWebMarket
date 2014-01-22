@@ -8,6 +8,7 @@
 	<br />
 	<input type="submit" value="Connexion">
 	<input type="reset">
+	<p>Vous n'avez pas de compte ? <a href="creerLogin.jsp">Inscrivez-vous</a></p>
       </form>
     </body>
 </html>
