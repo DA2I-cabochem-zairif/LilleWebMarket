@@ -28,13 +28,13 @@ public class SelectInfoMarche extends HttpServlet
 	    
 	    // Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
 	    String iddemande = req.getParameter("marche");
-	    String query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
+	    String query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" and t.description = 'vente' group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
 	    
 	    ResultSet rs = state.executeQuery(query);
 	    int nbColumn = rs.getMetaData().getColumnCount();
 	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
 	    out.println("<article><div class=\"wrap\">");
-	    out.println("<h1>Ma table : </h1>");
+	    out.println("<h1>Vendeurs : </h1>");
 	    out.println("<p>Cash : "+session.getAttribute("cash")+"</p>");
 	    out.println("<table>");
 	    out.println("<tr>");
@@ -52,6 +52,30 @@ public class SelectInfoMarche extends HttpServlet
 		out.println("</tr><tr>");
 	    }
 	    out.println("</table>");
+	    
+	    query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" and t.description = 'achat' group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
+	    rs = state.executeQuery(query);
+	    nbColumn = rs.getMetaData().getColumnCount();
+	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
+	    out.println("<article><div class=\"wrap\">");
+	    out.println("<h1>Acheteurs : </h1>");
+	    out.println("<table>");
+	    out.println("<tr>");
+	    rsmd = rs.getMetaData();
+	    for (int i = 1 ; i <= nbColumn ; i++)
+	    {
+		out.println("<td>"+rsmd.getColumnName(i)+"</td>");
+	    }
+	    out.println("</tr>");
+	    while (rs.next())
+	    {
+		out.println("<tr>");
+		for (int i = 1 ; i <= nbColumn ; i++)
+		    out.println("<td>"+rs.getString(i)+"</td>");
+		out.println("</tr><tr>");
+	    }
+	    out.println("</table>");
+	    
 	    out.println("<p><a href=\"SelectInfoMarcheInverse?marche="+iddemande+"\">Marché inverse</a></p>");
 	    out.println("<p><a href=\"index.jsp\">Retour à la liste des marchés</a></p>");
 	    out.println("</div></article><article><div class=\"wrap\">");
