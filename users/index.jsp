@@ -17,7 +17,7 @@
 	
 	     Connection con = DriverManager.getConnection(url,user, mdp);
 	     Statement stmt= con.createStatement();
-             PreparedStatement ps = con.prepareStatement("select * from marche;");
+             PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
              ResultSet rs = ps.executeQuery();
 	     %><center><h3>Liste des marchés :</h3></center><%
         while (rs.next())

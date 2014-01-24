@@ -40,6 +40,7 @@ create table marche
 	libelle text,
 	inverse text,
 	datefin date,
+	statut text default 'EN COURS',
 	constraint pk_marche primary key (idmarche)
 );
 
