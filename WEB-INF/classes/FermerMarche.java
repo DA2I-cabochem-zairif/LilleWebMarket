@@ -40,7 +40,21 @@ public class FermerMarche extends HttpServlet
 		int cashUser = rsCashUser.getInt("cash") + gain;
 		con.prepareStatement("update utilisateur set cash = "+cashUser+" where iduser = "+iduser+" ;").executeUpdate();
 	    }
-	    
+	    String ReqOffrants = "select u.iduser, 100 - av.prix as prixinverse, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and t.description = 'vente' group by u.iduser, prixinverse;";
+	    PreparedStatement psOffrants = con.prepareStatement(ReqOffrants);
+	    psOffrants.setInt(1, idmarche);
+	    ResultSet rsOffrants = psOffrants.executeQuery();
+	    while (rsOffrants.next())
+	    {
+		int iduser = rsOffrants.getInt("iduser");
+		int quantite = rsOffrants.getInt("quantite");
+		int prixunitaire = rsOffrants.getInt("prixinverse");
+		int gain = quantite * prixunitaire;
+		ResultSet rsCashUser = con.prepareStatement("select cash from utilisateur where iduser = "+iduser+" ;").executeQuery();
+		rsCashUser.next();
+		int cashUser = rsCashUser.getInt("cash") + gain;
+		con.prepareStatement("update utilisateur set cash = "+cashUser+" where iduser = "+iduser+" ;").executeUpdate();
+	    }
 	}
 	catch (Exception e)
 	{
