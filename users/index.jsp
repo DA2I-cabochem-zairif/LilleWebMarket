@@ -24,7 +24,7 @@
         {
 	    %>
 	  <p>
-	    <a href='<%= request.getContextPath() %>/SelectInfoMarche?marche=<%= rs.getString("idmarche")%>' > <%= rs.getString("libelle") %></a>
+	    <a href="selectMarche.jsp?marche=<%= rs.getInt("idmarche") %>" > <%= rs.getString("libelle") %></a>
 	  </p>
 	    <%
 	}

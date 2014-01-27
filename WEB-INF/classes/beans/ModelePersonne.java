@@ -11,8 +11,9 @@ public class ModelePersonne
 {
     protected ArrayList<Personne> list = new ArrayList<Personne>();
     protected Connection con = null;
+    protected ResultSet rs;
     
-    public Tool()
+    public ModelePersonne()
     {
 	this.initialize();
     }
@@ -55,7 +56,6 @@ public class ModelePersonne
 		p.setIdUser(iduser);
 		p.setNom(nom);
 		p.setPrenom(prenom);
-		p.setSexe(sexe);
 		p.setLogin(login);
 		p.setMdp(mdp);
 		p.setCash(cash);
@@ -82,10 +82,47 @@ public class ModelePersonne
 	return chaine;
     }
     
-    /*public static void main (String [] args)
+    public void execute(String query)
     {
-	Tool t = new Tool();
-	System.out.println(t.lister("S"));
+	try
+	{
+	    rs = con.prepareStatement(query).executeQuery();
+	    while (rs.next())
+	    {
+		Personne p = new Personne();
+		int iduser = rs.getInt("iduser");
+		String nom = rs.getString("nom");
+		String prenom = rs.getString("prenom");
+		String login = rs.getString("login");
+		String mdp = rs.getString("mdp");
+		int cash = rs.getInt("cash");
+		p.setIdUser(iduser);
+		p.setNom(nom);
+		p.setPrenom(prenom);
+		p.setLogin(login);
+		p.setMdp(mdp);
+		p.setCash(cash);
+		list.add(p);
+	    }
+	    rs.close();
+	    con.close();
+	}
+	catch (Exception e)
+	{
+	    e.printStackTrace();
+	}
+    }
+    
+    public Personne get(int i)
+    {
+	return list.get(i);
+    }
+    /*
+    public static void main (String [] args)
+    {
+	ModelePersonne mp = new ModelePersonne();
+	mp.execute("select * from utilisateur;");
+	System.out.println(mp.get(0));
     }
     */
 }

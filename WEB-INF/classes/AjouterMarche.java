@@ -24,11 +24,9 @@ public class AjouterMarche extends HttpServlet
 	    
 	    // Création de l'état
 	    Statement state = con.createStatement();
-	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
-	    out.println("<article><div class=\"wrap\">");
 	    if (req.getParameter("libelle").equals("") || req.getParameter("inverse").equals("") || req.getParameter("dateFin").equals(""))
 	    {
-		out.println("<p>Go kill yourself</p>");
+		res.sendRedirect(req.getContextPath()+"/admin/formMarche.jsp");
 	    }
 	    else
 	    {
@@ -41,12 +39,8 @@ public class AjouterMarche extends HttpServlet
 		ResultSet rs2 = ps2.executeQuery();
 		rs2.next();
 		String lastId = rs2.getString("max");
-		out.println("<p><a href=\"SelectInfoMarche?marche="+lastId+"\">Voir ce marché</a></p>");
+		res.sendRedirect(req.getContextPath()+"/admin/ajoutMarche.jsp?marche="+lastId);
 	    }
-	    out.println("<p><a href=\"users/index.jsp\">Retour à la liste des marchés</a></p>");
-	    out.println("<p><a href=\"admin/formMarche.jsp\">Ajouter un nouveau marché</a></p>");
-	    out.println("</div></article>");
-	    out.println("</body></html>");
 	}
 	catch (Exception e)
 	{
