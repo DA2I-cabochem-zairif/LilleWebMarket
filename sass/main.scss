@@ -1,4 +1,6 @@
 @import "compass/css3";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
 
 /* Vars */
 $bleuclair : rgb(000,169,224);
@@ -27,66 +29,49 @@ header{
 		color:$blanc;
 		display:inline;
 	}
-	.infouser{
-
-		font-family:"maFont";
-		margin-top:12px;	
-		float:right;
-		border-radius:5em;
-		border-bottom-right-radius:1em;
-		border-top-right-radius:1em;
-		background-color:$bleufonce;
-		color:$blanc;
-		width:300px;
-		height:100px;
-		position:relative;
-		img{
-			display:inline;
-			margin-top:3px;
-			margin-left:5px;
-			border-radius:50%;
-			border:2px solid $blanc;
-			@include single-box-shadow;
-		}
-		.user{
-			padding-left:25px;
-			padding-top:5px;
-			position:absolute;
-
-			display:inline;
-		}
-		p{
-			text-align:center;
-			font-size:0.9em;
-			padding:3px;
-			em{
-				font-size:1.1em;
-			}
-			a{
-				text-decoration:underline;
-				color:$blanc;
-				font-size:0.8em;
-			}
-		}
-		.raiting{
-			padding-left:5px;
-			position:absolute;	
-			ul{
-				margin:auto;
-				li{
-					float:left;
-					width:22px;
-					height:22px;
-					background:url('../img/stars.png') no-repeat;
-				}
+}
+aside{
+	float: left;
+	text-align: center;
+	color: $blanc;
+	margin-top: 5px;
+	margin-left: 10px;
+	@include border-radius(12px);
+	padding: 10px;
+	background-color: $bleuclair;
+	img{
+		@include border-radius(50%);
+		border: solid $blanc 3px;
+		@include box-shadow($noir 2px 2px 10px);
+	}
+	.raiting{
+		float: left;
+		ul
+		{
+			float: left;
+			margin-left: 10px;
+			li
+			{
+				//display: inline;
+				float: left;
+				width: 25px;
+				height: 25px;
+				background-image: url('../img/stars.png');
+				background-repeat: no-repeat;
 			}
 		}
 	}
-}
+	
+	p{
 
+		height: 25px;
+		line-height: 25px;
+		clear: both;
+	}
+}
 article{
 	.wrap{
-		border-radius: 12px;
+		@include border-radius(12px);
 		background-color:$bleuclairt; 
 		margin:auto;
 		margin-top: 5px;

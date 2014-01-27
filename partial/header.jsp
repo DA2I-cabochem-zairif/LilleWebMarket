@@ -13,16 +13,23 @@
       <div class="wrap">
        	<a href="<%= request.getContextPath() %>/users/index.jsp" alt="Accueil"><img src="<%= request.getContextPath() %>/img/logo.png" alt="Logo-univ-lille1"></a>
         <h1>Lille Web Market</h1>
-        <div class="infouser">
+        
+      </div>
+    </header>
+    <aside>
+      <div class="infouser">
           <img src="http://lorempixel.com/90/90/" alt="photo">
           <div class="user">
             <p>Bienvenue</p>
-            <p><em>${prenom} ${nom}</em></p>
-            <p><a href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
+            <p><em>${prenom} ${nom}</em></p>            
             <div class="raiting">
               <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
+            <ul>
+              <li>Solde : 2000000</li>
+              <li>Titre : 50</li>
+            </ul> 
+            <p><a href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
           </div>
         </div>
-      </div>
-    </header>
+    </aside>
