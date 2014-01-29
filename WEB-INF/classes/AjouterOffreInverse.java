@@ -84,7 +84,7 @@ public class AjouterOffreInverse extends HttpServlet
 			vendre.setInt(2, idachatvente);
 			vendre.executeUpdate();
 			out.println("1");
-			con.prepareStatement("insert into titre values (default, "+iduser+", 'vendu') ;").executeUpdate();
+			con.prepareStatement("insert into titre values (default, "+iduser+", 'vendu', default) ;").executeUpdate();
 			ResultSet rsTitre = con.prepareStatement("select max(idtitre) from titre ;").executeQuery();
 			rsTitre.next();
 			int lastIdTitre = rsTitre.getInt("max");
@@ -132,7 +132,7 @@ public class AjouterOffreInverse extends HttpServlet
 		}
 		if (quantite > 0)
 		{
-		    String query = "insert into titre values (default, ?, 'vente');";
+		    String query = "insert into titre values (default, ?, 'vente', default);";
 		    PreparedStatement ps = con.prepareStatement(query);
 		    ps.setInt(1, iduser);
 		    ps.executeUpdate();
