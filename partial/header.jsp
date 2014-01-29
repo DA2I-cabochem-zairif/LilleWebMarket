@@ -26,7 +26,7 @@
               <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
             <ul>
-              <li>Solde : 2000000</li>
+              <li>Solde : ${cash}</li>
               <li>Titre : 50</li>
             </ul> 
             <p><a href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
