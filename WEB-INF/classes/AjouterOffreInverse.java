@@ -78,6 +78,7 @@ public class AjouterOffreInverse extends HttpServlet
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
+			session.setAttribute("cash", du);
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, disponible);
 			vendre.setInt(2, idachatvente);
@@ -105,6 +106,7 @@ public class AjouterOffreInverse extends HttpServlet
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
+			session.setAttribute("cash", du);
 			out.println("2");
 			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vendu' where idtitre = "+idtitre+" ;").executeUpdate();
 		    }
@@ -118,6 +120,7 @@ public class AjouterOffreInverse extends HttpServlet
 			psCash.setInt(1, recu);
 			psCash.setInt(2, idpossesseur);
 			psCash.executeUpdate();
+			session.setAttribute("cash", recu);
 			int du = cash - prixAPayer;
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
@@ -161,7 +164,7 @@ public class AjouterOffreInverse extends HttpServlet
 		    session.setAttribute("cash", somme);
 		}
 	    }
-	    res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
+	    res.sendRedirect(req.getContextPath()+"/users/selectMarcheInverse.jsp?marche="+req.getParameter("idmarche"));
 	}
 	catch (Exception e)
 	{

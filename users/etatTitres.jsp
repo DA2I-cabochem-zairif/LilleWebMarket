@@ -4,7 +4,6 @@
 <jsp:include page="../partial/header.jsp"/>
     <article>
       <div class="wrap">
-        <h1>Lille Web Market</h1>
           <%
 	     Class.forName(getServletContext().getInitParameter("driver"));
 	     
@@ -14,14 +13,13 @@
 	     Connection con = DriverManager.getConnection(url,user, mdp);
 	     Statement state = con.createStatement();
 	     String iddemande = request.getParameter("marche");
-	     String query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and t.description = 'vente' group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
+	     String query = "select t.description as État, m.libelle as Marché, m.statut, m.dateFin, sum(av.quantite) as Quantité, av.prix as Prix from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and u.iduser = ? group by t.description, m.libelle, m.statut, m.dateFin, av.prix order by m.libelle, m.statut, m.dateFin, t.description, av.prix, Quantité;";
 	     PreparedStatement ps = con.prepareStatement(query);
-	     ps.setInt(1, Integer.parseInt(iddemande));
+	     ps.setInt(1, Integer.parseInt(request.getParameter("user")));
 	     ResultSet rs = ps.executeQuery();
 	     int nbColumn = rs.getMetaData().getColumnCount();
 	     %>
-		  <h1>Vendeurs : </h1>
-		  <p>Cash : <%= session.getAttribute("cash") %></p>
+		  <h1>Résumés des titres de ${prenom}</h1>
 		  <table><tr>
 	    <%
 	    ResultSetMetaData rsmd = rs.getMetaData();
@@ -29,31 +27,9 @@
 	    { %> <td> <%= rsmd.getColumnName(i) %> </td><% } %> <tr> <% 
 	    while (rs.next())
 	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %> </tr><tr> <% } %> </table> <%
-	    query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and t.description = 'achat' group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
-	    ps = con.prepareStatement(query);
-	    ps.setInt(1, Integer.parseInt(iddemande));
-	    rs = ps.executeQuery();
-	    nbColumn = rs.getMetaData().getColumnCount(); %>
-		<h1>Acheteurs : </h1>
-		<table><tr> <%
-	    rsmd = rs.getMetaData();
-	    for (int i = 1 ; i <= nbColumn ; i++)
-	    { %> <td> <%= rsmd.getColumnName(i) %></td> <% } %></tr> <%
-	    while (rs.next()) { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %> </tr><tr> <% } %> </table>
-	    <p><a href="selectMarcheInverse.jsp?marche=<%= iddemande %>">Marché inverse</a></p>
-	    <p><a href="index.jsp">Retour à la liste des marchés</a></p>
-	    </div></article><article><div class="wrap">
-		<h3>Ajouter une offre</h3>
-		<form method="post" action="AjouterOffre">
-		  <p><label for="quantite">Nombre de bons :</label>
-		  <input type="text" name="quantite" id="quantite" /></p>
-		  <p><label for="prix">Prix du bon :</label>
-		  <input type="text" name="prix" id="prix" /></p>
-		  <input type="hidden" name="idmarche" id="idmarche" value= <%= request.getParameter("marche") %> />
-		  <p><input type="submit" value="Ajouter l'offre"></p>
-		</form> <%
 	    con.close();
       %>
+      <p><a href="index.jsp">Revenir à la liste des marchés</a></p>
       </div>
     </article>
 <jsp:include page="../partial/footer.jsp"/>

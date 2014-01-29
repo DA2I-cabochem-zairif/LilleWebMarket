@@ -76,6 +76,7 @@ public class AjouterOffre extends HttpServlet
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
+			session.setAttribute("cash", du);
 			PreparedStatement vendre = con.prepareStatement(reqVente);
 			vendre.setInt(1, disponible);
 			vendre.setInt(2, idachatvente);
@@ -103,6 +104,7 @@ public class AjouterOffre extends HttpServlet
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
+			session.setAttribute("cash", du);
 			out.println("2");
 			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vendu' where idtitre = "+idtitre+" ;").executeUpdate();
 		    }
@@ -120,6 +122,7 @@ public class AjouterOffre extends HttpServlet
 			psCash.setInt(1, du);
 			psCash.setInt(2, iduser);
 			psCash.executeUpdate();
+			session.setAttribute("cash", du);
 			out.println("3");
 			con.prepareStatement("update achatvente set quantite = "+restant+" where idachatvente = "+idachatvente+" ;").executeUpdate();
 			con.prepareStatement("update titre set iduser = "+iduser+", description = 'vendu' where idtitre = "+idtitre+" ;").executeUpdate();
@@ -159,7 +162,7 @@ public class AjouterOffre extends HttpServlet
 		    session.setAttribute("cash", somme);
 		}
 	    }
-	    res.sendRedirect("SelectInfoMarche?marche="+req.getParameter("idmarche"));
+	    res.sendRedirect(req.getContextPath()+"/users/selectMarche.jsp?marche="+req.getParameter("idmarche"));
 	}
 	catch (Exception e)
 	{

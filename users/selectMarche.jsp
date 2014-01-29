@@ -44,7 +44,7 @@
 	    <p><a href="index.jsp">Retour à la liste des marchés</a></p>
 	    </div></article><article><div class="wrap">
 		<h3>Ajouter une offre</h3>
-		<form method="post" action="AjouterOffre">
+		<form method="post" action="../AjouterOffre">
 		  <p><label for="quantite">Nombre de bons :</label>
 		  <input type="text" name="quantite" id="quantite" /></p>
 		  <p><label for="prix">Prix du bon :</label>

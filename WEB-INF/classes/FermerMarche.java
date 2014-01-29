@@ -57,6 +57,7 @@ public class FermerMarche extends HttpServlet
 		    rsCashUser.next();
 		    int cashUser = rsCashUser.getInt("cash") + gain;
 		    con.prepareStatement("update utilisateur set cash = "+cashUser+" where iduser = "+iduser+" ;").executeUpdate();
+		    session.setAttribute("cash", cashUser);
 		}
 	    }
 	    lesTitres += ")";
@@ -91,6 +92,7 @@ public class FermerMarche extends HttpServlet
 		rsCashUser.next();
 		int cashUser = rsCashUser.getInt("cash") + gain;
 		con.prepareStatement("update utilisateur set cash = "+cashUser+" where iduser = "+iduser+" ;").executeUpdate();
+		session.setAttribute("cash", cashUser);
 	    }
 	    lesTitres += ")";
 	    if (!premierPassage)
