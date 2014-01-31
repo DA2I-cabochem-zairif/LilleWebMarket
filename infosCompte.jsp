@@ -1,7 +1,9 @@
-<html>
-  <%@ page import="java.sql.*" errorPage="erreur.jsp" %>
-<title></title>
-    <body>
+<%@ page pageEncoding="utf-8" %>
+<%@ page errorPage="../erreur.jsp" %>
+<%@ page import="java.sql.*,javax.sql.*,javax.naming.*"%>
+<% session.setAttribute("page","Index"); %>
+
+<jsp:include page="../partial/header.jsp"/>
       <center>
 	<%
 	   Class.forName(getServletContext().getInitParameter("driver"));

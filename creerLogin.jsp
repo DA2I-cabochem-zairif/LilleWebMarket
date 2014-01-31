@@ -1,5 +1,5 @@
-<html>
-<title></title>
+
+<jsp:include page="partial/header.jsp"/>
     <body>
       <center>
       <form action="AjouterUtilisateur" method="post">
@@ -14,3 +14,5 @@
       </form>
     </body>
 </html>
+
+<jsp:include page="partial/footer.jsp"/>

@@ -1,5 +1,6 @@
-<%@page pageEncoding="utf-8" %>
-<%@ page import="java.sql.*" errorPage="../erreur.jsp" %>
+<%@ page pageEncoding="utf-8" %>
+<%@ page errorPage="../erreur.jsp" %>
+<%@ page import="java.sql.*,javax.sql.*,javax.naming.*"%>
 <% session.setAttribute("page","Index"); %>
 <jsp:include page="../partial/header.jsp"/>
   <head><link rel="stylesheet" type="text/css" href="css/main.css"></head>
@@ -10,9 +11,11 @@
         <table>
           <%
 	     Class.forName(getServletContext().getInitParameter("driver"));
-	     Context initCtx = new InitialContext();
-	     Context envCtx  = (Context) initCtx.lookup("java:comp/env");
-	     DataSource ds   = (DataSource) envCtx.lookup("madb");
+     	Connection con;
+    	Class.forName(getServletContext().getInitParameter("driver"));
+        Context initCtx = new InitialContext();
+    	Context envCtx  = (Context) initCtx.lookup("java:comp/env");
+    	DataSource ds   = (DataSource) envCtx.lookup("madb");
 	     con = ds.getConnection();
 	     /*String url = getServletContext().getInitParameter("url");
 	     String user = getServletContext().getInitParameter("user");

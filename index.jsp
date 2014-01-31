@@ -1,5 +1,4 @@
 <%@ page pageEncoding="utf-8" %>
-<%@ page import="java.sql.*" errorPage="erreur.jsp" %>
       <% session.setAttribute("page","Index");
 session.setAttribute("nom","Anonyme");
 session.setAttribute("prenom","");

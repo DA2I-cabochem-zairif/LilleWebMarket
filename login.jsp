@@ -1,5 +1,9 @@
-<html>
-<title></title>
+<%@ page pageEncoding="utf-8" %>
+<%@ page errorPage="erreur.jsp" %>
+<%@ page import="java.sql.*,javax.sql.*,javax.naming.*"%>
+<% session.setAttribute("page","Index"); %>
+
+<jsp:include page="partial/header.jsp"/>
     <body>
       <center>
       <form action="Login" method="post">
@@ -12,3 +16,5 @@
       </form>
     </body>
 </html>
+
+<jsp:include page="partial/footer.jsp"/>
