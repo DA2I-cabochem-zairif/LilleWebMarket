@@ -18,16 +18,9 @@ public class Login extends HttpServlet
 	try
 	{
 	    Class.forName(getServletContext().getInitParameter("driver"));
-	    /*
-	    String url = getServletContext().getInitParameter("url");
-	    String user = getServletContext().getInitParameter("user");
-	    String mdp = getServletContext().getInitParameter("mdp");
-	    */
-
 	    Context initCtx = new InitialContext();
 	    Context envCtx  = (Context) initCtx.lookup("java:comp/env");
 	    DataSource ds   = (DataSource) envCtx.lookup("madb");
-	    //con = DriverManager.getConnection(url, user, mdp);
 	    con = ds.getConnection();
 	    Statement stmt = con.createStatement();
 	    

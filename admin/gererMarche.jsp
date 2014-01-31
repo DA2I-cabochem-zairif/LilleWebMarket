@@ -10,12 +10,15 @@
         <table>
           <%
 	     Class.forName(getServletContext().getInitParameter("driver"));
-	     
-	     String url = getServletContext().getInitParameter("url");
+	     Context initCtx = new InitialContext();
+	     Context envCtx  = (Context) initCtx.lookup("java:comp/env");
+	     DataSource ds   = (DataSource) envCtx.lookup("madb");
+	     con = ds.getConnection();
+	     /*String url = getServletContext().getInitParameter("url");
 	     String user = getServletContext().getInitParameter("user");
 	     String mdp = getServletContext().getInitParameter("mdp");
 	
-	     Connection con = DriverManager.getConnection(url,user, mdp);
+	     Connection con = DriverManager.getConnection(url,user, mdp);*/
 	     Statement stmt= con.createStatement();
              PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
              ResultSet rs = ps.executeQuery();

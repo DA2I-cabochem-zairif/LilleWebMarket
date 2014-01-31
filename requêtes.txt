@@ -18,3 +18,6 @@ select u.iduser, u.login, m.idmarche, sum(av.quantite) as quantite from utilisat
 
 Liste les titres d'un utilisateurs, qu'ils soient en cours, vendus, perdus, gagnés, rendus, en offre d'achat ou de vente :
 select u.iduser, u.login, t.idtitre, t.description, m.idmarche, m.libelle, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and u.iduser = 1 group by u.iduser, u.login, t.idtitre, t.description, m.idmarche, m.libelle order by t.description;
+
+Vérification de l'algo à la con :
+select t.idtitre, t.iduser, t.description, av.idachatvente, av.prix, av.quantite from titre t, achatvente av, transactions tr where tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente;
