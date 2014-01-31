@@ -32,7 +32,8 @@ public class SelectInfoMarche extends HttpServlet
 	    
 	    ResultSet rs = state.executeQuery(query);
 	    int nbColumn = rs.getMetaData().getColumnCount();
-	    out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
+	    //this.loadJSP("/partial/header.jsp",req,res);
+	   	out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""+req.getContextPath()+"/css/main.css\"> </head><body>");
 	    out.println("<article><div class=\"wrap\">");
 	    out.println("<h1>Vendeurs : </h1>");
 	    out.println("<p>Cash : "+session.getAttribute("cash")+"</p>");
@@ -89,7 +90,8 @@ public class SelectInfoMarche extends HttpServlet
 	    out.println("<p><input type=\"submit\" value=\"Ajouter l'offre\"></p>");
 	    out.println("</form>");
 	    out.println("</div></article>");
-	    out.println("</body></html>");
+	   
+	    //this.loadJSP("/partial/footer.jsp",req,res);
 	}
 	catch (Exception e)
 	{
@@ -110,4 +112,13 @@ public class SelectInfoMarche extends HttpServlet
 	    }
 	}
     }
+
+    public void loadJSP(String url,HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+    	if (url == null) { return; }
+     	if (url.charAt(0) != '/') { url = '/' + url; }
+        
+        ServletContext sc = getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher(url);
+        rd.forward(req,resp);
+	}	
 }

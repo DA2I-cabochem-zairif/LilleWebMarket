@@ -4,8 +4,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
-@WebServlet("/api/InfoMarcheInverse")
-public class JsonInfoMarcheInverse extends HttpServlet
+@WebServlet("/api/InfoMarche")
+public class JsonInfoMarche extends HttpServlet
 {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
@@ -26,10 +26,7 @@ public class JsonInfoMarcheInverse extends HttpServlet
 	    // Création de l'état
 	    Statement state = con.createStatement();
 	    
-	    // Requête qui récupère l'identité de chaque vendeur sur le marche dont l'id est iddemande :
-	    String iddemande = req.getParameter("marche");
-	    String query =  "select  avg(av.prix) from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = "+iddemande+" and t.description = 'achat' group by  t.jourachat order by t.jourachat asc;";
-
+	    // Requête qui récupère l'identité de chaque vendeur 
 	    ResultSet rs = state.executeQuery(query);
 	    int nbColumn = rs.getMetaData().getColumnCount();
 	    String ret   = "";

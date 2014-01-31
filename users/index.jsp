@@ -9,22 +9,21 @@
         <p><a href='<%= request.getContextPath() %>/admin/gererMarche.jsp'>Gérer les marchés</a></p>
         <table>
           <%
-	     Class.forName(getServletContext().getInitParameter("driver"));
-	     
-	     String url = getServletContext().getInitParameter("url");
-	     String user = getServletContext().getInitParameter("user");
-	     String mdp = getServletContext().getInitParameter("mdp");
-	
-	     Connection con = DriverManager.getConnection(url,user, mdp);
-	     Statement stmt= con.createStatement();
-             PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
-             ResultSet rs = ps.executeQuery();
-	     %><center><h3>Liste des marchés :</h3></center><%
+          	Connection con;
+	    	Class.forName(getServletContext().getInitParameter("driver"));
+	    		    Context initCtx = new InitialContext();
+	    	Context envCtx  = (Context) initCtx.lookup("java:comp/env");
+	    	DataSource ds   = (DataSource) envCtx.lookup("madb");
+	    	con = ds.getConnection();
+	    
+            PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
+            ResultSet rs = ps.executeQuery();
+	     %><h3>Liste des marchés :</h3><%
         while (rs.next())
         {
 	    %>
 	  <p>
-	    <a href="selectMarche.jsp?marche=<%= rs.getInt("idmarche") %>" > <%= rs.getString("libelle") %></a>
+	    <a class="titre" href="selectMarche.jsp?marche=<%= rs.getInt("idmarche") %>" > <%= rs.getString("libelle") %></a>
 	  </p>
 	    <%
 	}

@@ -27,10 +27,10 @@
             </div>
             <ul>
               <li>Solde : ${cash}</li>
-              <li>Titre : 50</li>
+              <li><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Mes titres <em>(50)</em></a></li>
             </ul> 
-            <p><a href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
-	    <p><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Espace personnel</a></p>
+            <p><a class="button" href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
+	    <!--<p><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Espace personnel</a></p>-->
           </div>
         </div>
     </aside>

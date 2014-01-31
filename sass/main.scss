@@ -44,6 +44,13 @@ aside{
 		border: solid $blanc 3px;
 		@include box-shadow($noir 2px 2px 10px);
 	}
+	a{
+		color: $blanc;
+		em{
+			font-size: 0.9em;
+			font-style: italic;
+		}
+	}
 	.raiting{
 		float: left;
 		ul
@@ -194,6 +201,11 @@ article{
 		a:hover{
 			color: $bleufonce;
 		}
+	}
+	.titre{
+		float: left;
+		color: $bleufonce;
+
 	}
 }
 

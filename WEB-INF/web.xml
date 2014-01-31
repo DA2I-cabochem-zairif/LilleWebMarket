@@ -29,12 +29,12 @@
     
     <context-param>
       <param-name>url</param-name>
-      <param-value>jdbc:postgresql://localhost/da2i</param-value>
+      <param-value>jdbc:postgresql://localhost/maxime</param-value>
     </context-param>
     
     <context-param>
       <param-name>user</param-name>
-      <param-value>fouad</param-value>
+      <param-value>maxime</param-value>
     </context-param>
     
     <context-param>

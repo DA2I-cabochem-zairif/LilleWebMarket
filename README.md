@@ -14,3 +14,10 @@ LilleWebMarket est un site web de Bourse d'information réalisé à l'aide de la
 - Trader
 - MarketMaker
 - Administrateur
+
+Rapport
+--------
+- Procédure d'installation
+- Choix techniques
+- Conception (MCD, etc...)
+- Les limites de nôtre projet
