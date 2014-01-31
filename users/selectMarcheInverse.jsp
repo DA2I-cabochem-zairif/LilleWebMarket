@@ -20,6 +20,7 @@
 	     ResultSet rs = ps.executeQuery();
 	     int nbColumn = rs.getMetaData().getColumnCount();
 	     %>
+		 <div id="jqplot"></div>
 		  <h1>Vendeurs : </h1>
 		  <p>Cash : <%= session.getAttribute("cash") %></p>
 		  <table><tr>
@@ -57,4 +58,10 @@
         </table>
       </div>
     </article>
+	  <script language="javascript" type="text/javascript" src="<%= request.getContextPath()%>/js/jquery-2.1.0.min.js"></script>
+		<script language="javascript" type="text/javascript" src="<%= request.getContextPath()%>/js/jquery.jqplot.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/js/jquery.jqplot.min.css" /
+<script language="javascript" type="text/javascript" src="<%= request.getContextPath()%>/js/jqplot.json2.min.js"></script>
+<script language="javascript" type="text/javascript" src="<%= request.getContextPath()%>/js/marcheInverse.js"></script>
+<jsp:include page="../partial/footer.jsp"/>
 <jsp:include page="../partial/footer.jsp"/>
