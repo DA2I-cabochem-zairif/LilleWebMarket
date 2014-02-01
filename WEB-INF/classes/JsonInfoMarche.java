@@ -4,8 +4,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
-@WebServlet("/api/InfoMarcheInverse")
-public class JsonInfoMarcheInverse extends HttpServlet
+@WebServlet("/api/InfoMarche")
+public class JsonInfoMarche extends HttpServlet
 {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {

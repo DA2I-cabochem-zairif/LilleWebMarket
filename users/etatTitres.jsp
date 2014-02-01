@@ -30,9 +30,17 @@
 	    <%
 	    ResultSetMetaData rsmd = rs.getMetaData();
 	    for (int i = 1 ; i <= nbColumn ; i++)
-	    { %> <td> <%= rsmd.getColumnName(i) %> </td><% } %> <tr> <% 
+	    { %> <td> <%= rsmd.getColumnName(i) %> </td><% } %> <td>Action</td><tr> <% 
 	    while (rs.next())
-	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %> </tr><tr> <% } %> </table> <%
+	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %>
+		    <td>
+			 <form method="get" action='formAction.jsp?marche=&user='>
+			 <input type="submit" value="Vendre">
+			 <input type="hidden" name="idmarche" id="idmarche" value="1" />
+			 <input type="hidden" name="max" id="max" value='<%= rs.getInt("quantité")%>' />
+			 <input type="hidden" name="user" id="user" value='<%= request.getParameter("user")%>' />
+			 </form>
+			 </td></tr><tr> <% } %> </table> <%
 	    con.close();
       %>
       <p><a href="index.jsp">Revenir à la liste des marchés</a></p>
