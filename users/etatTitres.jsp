@@ -35,7 +35,8 @@
 	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %>
 		    <td>
 			 <form method="get" action='formAction.jsp?marche=&user='>
-			 <input type="submit" value="Vendre">
+			   <% if (rs.getString("statut").equals("EN COURS") && rs.getString("État").equals("vendu")) { %>
+			 <input type="submit" value="Vendre"><% } %>
 			 <input type="hidden" name="idmarche" id="idmarche" value="1" />
 			 <input type="hidden" name="max" id="max" value='<%= rs.getInt("quantité")%>' />
 			 <input type="hidden" name="user" id="user" value='<%= request.getParameter("user")%>' />
