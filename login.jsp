@@ -7,9 +7,9 @@
 
       <article>
       <div class="wrap">
-      <form action="Login" method="post">
-	<p>Login : <INPUT TYPE="text" SIZE="20" NAME="login" VALUE=""> <br /></p>
-	<p>Mot de passe : <INPUT TYPE="text" SIZE="20" NAME="mdp" VALUE=""><br /></p>
+      <form action="j_security_check" method="post">
+	<p>Login : <INPUT TYPE="text" SIZE="20" NAME="j_username" VALUE=""> <br /></p>
+	<p>Mot de passe : <INPUT TYPE="text" SIZE="20" NAME="j_password" VALUE=""><br /></p>
 	<br />
 	<p><input type="submit" value="Connexion">
 	<input type="reset"></p>

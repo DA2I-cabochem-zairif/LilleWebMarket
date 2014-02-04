@@ -1,17 +1,28 @@
 <Context path="/LilleWebMarket" privileged="true" reloadable="true">
 
-  <Resource name="madb" auth="Container" type="javax.sql.DataSource"
-	    maxActive="8" maxIdle="4" maxWait="10000"
-	    username="maxime" password="moi" driverClassName="org.postgresql.Driver"
-	    url="jdbc:postgresql://localhost/maxime" />
+  	<Resource 
+  	    name="madb" 
+            auth="Container" 
+  	    type="javax.sql.DataSource"
+	    maxActive="8" 
+	    maxIdle="4" 
+	    maxWait="10000"
+	    username="maxime" 
+	    password="moi" 
+	    driverClassName="org.postgresql.Driver"
+	    url="jdbc:postgresql://localhost/maxime" 
+	/>
 
-  <!-- TODO : Realm de connexion -->
-  <!--
-  <Realm  className="org.apache.catalina.realm.JDBCRealm" debug="99"
-	  driverName="org.postgresql.Driver"
-	  connectionURL="jdbc:postgresql://localhost/maxime"
-	  connectionName="maxime" connectionPassword="moi"
-	  userTable="utilisateur" userNameCol="login" userCredCol="mdp"
-	  userRoleTable="droit" roleNameCol="libelle"/>
-  -->  
+	<Realm
+	    className="org.apache.catalina.realm.DataSourceRealm"
+	    debug="99"
+	    dataSourceName="madb"
+	    localDataSource="true"
+	    userTable="utilisateur"
+	    userNameCol="login"
+	    userCredCol="mdp"
+	    userRoleTable="utilisateur"
+	    roleNameCol="droit"
+	/>
+  
 </Context>

@@ -45,12 +45,12 @@
       <filter-name>Set Character Encoding</filter-name>
       <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
       <init-param>
-	<param-name>encoding</param-name>
-	<param-value>UTF-8</param-value>
+      	<param-name>encoding</param-name>
+      	<param-value>UTF-8</param-value>
       </init-param>
       <init-param>
-	<param-name>ignore</param-name>
-	<param-value>false</param-value>
+      	<param-name>ignore</param-name>
+      	<param-value>false</param-value>
       </init-param>
     </filter>
     <filter-mapping>
@@ -60,9 +60,73 @@
 
     <jsp-config>
       <jsp-property-group>
-	<description>Config. de l'encodage des pages JSP</description>
-	<url-pattern>*.jsp</url-pattern>
-	<page-encoding>UTF-8</page-encoding>
+      	<description>Config. de l'encodage des pages JSP</description>
+      	<url-pattern>*.jsp</url-pattern>
+	       <page-encoding>UTF-8</page-encoding>
       </jsp-property-group>
     </jsp-config>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Market</web-resource-name>
+      <url-pattern>/users/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>administrateur</role-name>
+      <role-name>utilisateur</role-name>
+      <role-name>marketmaker</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admin</web-resource-name>
+      <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <!-- <role-name>Administrateur</role-name> -->
+      <role-name>administrateur</role-name>
+     <!--  <role-name>MarketMaker</role-name> -->
+    </auth-constraint>
+  </security-constraint>
+ <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>MarketMaker</web-resource-name>
+      <url-pattern>/marketmaker/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>administrateur</role-name>
+      <role-name>marketmaker</role-name>
+     <!--  <role-name>marketmaker</role-name> -->
+    </auth-constraint>
+  </security-constraint>
+<!-- La maniere dont la page de login est affichee -->
+ <!--  <login-config> -->
+   <!-- Type d'authentification -->
+   <!-- <auth-method>BASIC</auth-method>
+    <realm-name>Espace Membres</realm-name>
+  </login-config>-->
+    <login-config>
+      <auth-method>FORM</auth-method>
+      <form-login-config>
+        <form-login-page>/login.jsp</form-login-page>
+        <form-error-page>/erreur.jsp?message=Mauvaise%20combinaison</form-error-page>
+      </form-login-config>
+    </login-config>
+  <!-- La liste des differents roles -->
+  <security-role>
+    <role-name>administrateur</role-name>
+  </security-role>
+  <security-role>
+    <role-name>utilisateur</role-name>
+  </security-role>
+  <security-role>
+    <role-name>marketmaker</role-name>
+  </security-role> 
+
+  <Valve
+    className="org.apache.catalina.valves.AccessLogValve"
+    prefix="lillewebmarket_access."
+    suffix=".txt"
+    pattern="common"
+  />
 </web-app> 
