@@ -21,6 +21,7 @@ create table utilisateur
 create table droit
 (
 	iddroit serial,
+	login text,
 	libelle varchar(30),
 	constraint pk_droit primary key (iddroit)
 );
@@ -107,3 +108,6 @@ insert into transactions values (default, 1, 1);
 insert into transactions values (default, 2, 2);
 insert into transactions values (default, 3, 3);
 insert into transactions values (default, 4, 4);
+
+insert into droit values (default, 'souarep', 'admin');
+insert into droit values (default, 'cabochem' ,'user');

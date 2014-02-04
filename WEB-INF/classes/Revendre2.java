@@ -4,8 +4,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
-@WebServlet("/AjouterOffre")
-public class AjouterOffre extends HttpServlet
+@WebServlet("/Revendre2")
+public class Revendre2 extends HttpServlet
 {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
@@ -26,16 +26,16 @@ public class AjouterOffre extends HttpServlet
 	    int prix = Integer.parseInt(req.getParameter("prix"));
 	    int quantite = Integer.parseInt(req.getParameter("quantite"));
 	    int apayer = prix * quantite;
-	    int iduser = Integer.parseInt((String)session.getAttribute("iduser"));
+	    int iduser = Integer.parseInt(req.getParameter("user"));
 	    int cash = 0;
 	    ResultSet rsCash = con.prepareStatement("select cash from utilisateur where iduser = "+iduser+" ;").executeQuery();
 	    rsCash.next();
 	    cash = rsCash.getInt("cash");
 	    int idmarche = Integer.parseInt(req.getParameter("idmarche"));
 	    boolean riche = apayer <= cash;
-	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche)
+	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche || quantite > Integer.parseInt(req.getParameter("max")))
 	    {
-		res.sendRedirect("SelectInfoMarche?marche="+req.getParameter("idmarche"));
+		res.sendRedirect(req.getContextPath()+"/users/formAction.jsp?idmarche="+req.getParameter("idmarche")+"&max="+req.getParameter("max")+"&user="+req.getParameter("user"));
 	    }
 	    else
 	    {
