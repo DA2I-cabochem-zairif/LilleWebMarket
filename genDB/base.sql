@@ -7,6 +7,13 @@ drop table if exists transactions cascade;
 drop table if exists marche cascade;
 drop table if exists pouvoir cascade;
 
+create table droit
+(
+	iddroit serial,
+	libelle varchar(30),
+	constraint pk_droit primary key (iddroit)
+);
+
 create table utilisateur
 (
 	iduser serial,
@@ -15,15 +22,11 @@ create table utilisateur
 	login varchar(30),
 	mdp varchar(30),
 	cash integer DEFAULT 1000000,
+	droit varchar(50) DEFAULT 'utilisateur',
 	constraint pk_utilisateur primary key (iduser)
 );
 
-create table droit
-(
-	iddroit serial,
-	libelle varchar(30),
-	constraint pk_droit primary key (iddroit)
-);
+
 
 create table titre
 (
@@ -86,8 +89,14 @@ create table transactions
 	constraint fk_achatvente foreign key (idachatvente) references achatvente(idachatvente) on update cascade
 );
 
-insert into utilisateur values (default, 'Souare', 'Pape', 'souarep', 'amoi', default);
-insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', default);
+insert into droit values(1,'Administrateur');
+insert into droit values(2,'Utilisateur');
+insert into droit values(3,'MarketMaker');
+
+insert into utilisateur values (default, 'Souare' , 'Pape'  , 'souarep' , 'amoi',    default,default);
+insert into utilisateur values (default, 'Caboche', 'Maxime', 'cabochem', 'trololo', default,default);
+insert into utilisateur values (default, 'admin'  , 'admin' , 'admin'   , 'admin' ,  0      ,'administrateur');
+insert into utilisateur values (default, 'mm'     , 'mm'    , 'mm'      ,  'mm'  ,  0      ,'marketmaker');
 
 insert into marche values (default, 'Lille gagnera son prochain match', 'Lille fera match nul ou perdra son prochain match', '05-02-2014');
 insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Au UR le soir ça sera dégueu', '12-02-2014');
