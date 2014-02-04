@@ -43,21 +43,12 @@
       <filter-name>Set Character Encoding</filter-name>
       <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
       <init-param>
-<<<<<<< HEAD
       	<param-name>encoding</param-name>
       	<param-value>UTF-8</param-value>
       </init-param>
       <init-param>
       	<param-name>ignore</param-name>
       	<param-value>false</param-value>
-=======
-<param-name>encoding</param-name>
-<param-value>UTF-8</param-value>
-      </init-param>
-      <init-param>
-<param-name>ignore</param-name>
-<param-value>false</param-value>
->>>>>>> ea4b7915f80cb06011fb3bce6ed19be7768be057
       </init-param>
     </filter>
     <filter-mapping>
@@ -77,7 +68,6 @@
 
     <jsp-config>
       <jsp-property-group>
-<<<<<<< HEAD
       	<description>Config. de l'encodage des pages JSP</description>
       	<url-pattern>*.jsp</url-pattern>
 	       <page-encoding>UTF-8</page-encoding>
@@ -114,23 +104,15 @@
     <auth-constraint>
       <role-name>administrateur</role-name>
       <role-name>marketmaker</role-name>
-     <!--  <role-name>marketmaker</role-name> -->
     </auth-constraint>
   </security-constraint>
-<!-- La maniere dont la page de login est affichee -->
- <!--  <login-config> -->
-   <!-- Type d'authentification -->
-   <!-- <auth-method>BASIC</auth-method>
-    <realm-name>Espace Membres</realm-name>
-  </login-config>-->
-    <login-config>
-      <auth-method>FORM</auth-method>
-      <form-login-config>
-        <form-login-page>/login.jsp</form-login-page>
-        <form-error-page>/erreur.jsp?message=Mauvaise%20combinaison</form-error-page>
-      </form-login-config>
-    </login-config>
-  <!-- La liste des differents roles -->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/erreur.jsp?message=Mauvaise%20combinaison</form-error-page>
+    </form-login-config>
+  </login-config>
   <security-role>
     <role-name>administrateur</role-name>
   </security-role>
@@ -140,11 +122,4 @@
   <security-role>
     <role-name>marketmaker</role-name>
   </security-role> 
-
-  <Valve
-    className="org.apache.catalina.valves.AccessLogValve"
-    prefix="lillewebmarket_access."
-    suffix=".txt"
-    pattern="common"
-  />
 </web-app> 

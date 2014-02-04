@@ -26,9 +26,6 @@ create table utilisateur
 	constraint pk_utilisateur primary key (iduser)
 );
 
-<<<<<<< HEAD
-
-=======
 create table droit
 (
 	iddroit serial,
@@ -36,7 +33,6 @@ create table droit
 	libelle varchar(30),
 	constraint pk_droit primary key (iddroit)
 );
->>>>>>> ea4b7915f80cb06011fb3bce6ed19be7768be057
 
 create table titre
 (

@@ -1,6 +1,4 @@
 <Context path="/LilleWebMarket" privileged="true" reloadable="true">
-
-<<<<<<< HEAD
   	<Resource 
   	    name="madb" 
             auth="Container" 
@@ -25,3 +23,4 @@
 	    userRoleTable="utilisateur"
 	    roleNameCol="droit"
 	/>
+</Context>
