@@ -66,11 +66,4 @@ public class Personne
     {
 	this.cash = cash;
     }
-    
-    public String getHtml()
-    {
-	String html = "<tr><td>"+this.iduser+" </td><td>"+this.nom+" </td><td>"+this.prenom+" </td><td>"+this.login+" </td><td>"+this.mdp+" </td><td>"+this.cash+" </td></tr>";
-	
-	return html;
-    }
 }
