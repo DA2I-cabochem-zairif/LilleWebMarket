@@ -27,9 +27,12 @@
 	    <%
 	    ResultSetMetaData rsmd = rs.getMetaData();
 	    for (int i = 1 ; i <= nbColumn ; i++)
-	    { %> <td> <%= rsmd.getColumnName(i) %> </td><% } %> <tr> <% 
+	    {
+		if (i == 2 | i == 5 | i == 6 | i == 7){
+		%> <td> <%= rsmd.getColumnName(i) %> </td> <% 
+	    }} %> <tr> <% 
 	    while (rs.next())
-	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %> </tr><tr> <% } %> </table> <%
+	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { if (i == 2 | i == 5 | i == 6 | i == 7){ %> <td> <%= rs.getString(i) %> </td> <% }} %> </tr><tr> <% } %> </table> <%
 	    query = "select u.iduser, u.login, m.idmarche, m.libelle, av.prix, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and t.description = 'achat' group by u.iduser, u.login, m.idmarche, m.inverse, prix, t.description order by av.prix desc;";
 	    ps = con.prepareStatement(query);
 	    ps.setInt(1, Integer.parseInt(iddemande));
@@ -39,8 +42,9 @@
 		<table><tr> <%
 	    rsmd = rs.getMetaData();
 	    for (int i = 1 ; i <= nbColumn ; i++)
-	    { %> <td> <%= rsmd.getColumnName(i) %></td> <% } %></tr> <%
-	    while (rs.next()) { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { %> <td> <%= rs.getString(i) %> </td> <% } %> </tr><tr> <% } %> </table>
+	    { if (i == 2 || i == 5 || i == 6 || i == 7){ %> <td> <%= rsmd.getColumnName(i) %></td> <% }} %></tr> <%
+	    while (rs.next())
+	    { %> <tr> <% for (int i = 1 ; i <= nbColumn ; i++) { if (i == 2 || i == 5 || i == 6 || i == 7){ %> <td> <%= rs.getString(i) %> </td> <% }} %> </tr><tr> <% } %> </table>
 	    <p><a href="selectMarcheInverse.jsp?marche=<%= iddemande %>">Marché inverse</a></p>
 	    <p><a href="index.jsp">Retour à la liste des marchés</a></p>
 	    </div></article><article><div class="wrap">
