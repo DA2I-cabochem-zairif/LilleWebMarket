@@ -59,10 +59,10 @@
 <security-constraint>
      <web-resource-collection>
        <web-resource-name>Administrateur</web-resource-name>
-         <url-pattern>/admin/formMarche.jsp</url-pattern>
+         <url-pattern>/admin/*</url-pattern>
      </web-resource-collection>
       <auth-constraint>
-         <role-name>admin</role-name>
+         <role-name>administrateur</role-name>
       </auth-constraint>
 </security-constraint>
 
@@ -73,6 +73,7 @@
 	       <page-encoding>UTF-8</page-encoding>
       </jsp-property-group>
     </jsp-config>
+  
 
   <security-constraint>
     <web-resource-collection>
@@ -85,17 +86,9 @@
       <role-name>marketmaker</role-name>
     </auth-constraint>
   </security-constraint>
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>Admin</web-resource-name>
-      <url-pattern>/admin/*</url-pattern>
-    </web-resource-collection>
-    <auth-constraint>
-      <!-- <role-name>Administrateur</role-name> -->
-      <role-name>administrateur</role-name>
-     <!--  <role-name>MarketMaker</role-name> -->
-    </auth-constraint>
-  </security-constraint>
+
+  
+
  <security-constraint>
     <web-resource-collection>
       <web-resource-name>MarketMaker</web-resource-name>
@@ -106,6 +99,7 @@
       <role-name>marketmaker</role-name>
     </auth-constraint>
   </security-constraint>
+
   <login-config>
     <auth-method>FORM</auth-method>
     <form-login-config>

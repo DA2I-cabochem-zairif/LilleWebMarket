@@ -3,6 +3,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import java.sql.*;
+import java.util.*;
 
 @WebServlet("/FermerMarche")
 public class FermerMarche extends HttpServlet
@@ -100,7 +101,64 @@ public class FermerMarche extends HttpServlet
 		reqUpdateTitres = "update titre set description = 'rendu' where idtitre in "+lesTitres+" ;";
 		con.prepareStatement(reqUpdateTitres).executeUpdate();
 	    }
-	    con.prepareStatement("update marche set statut = 'fermé' where idmarche = "+idmarche+" ;").executeUpdate();
+	    con.prepareStatement("update marche set statut = '"+descTitre+"' where idmarche = "+idmarche+" ;").executeUpdate();
+	    /*String gagnants = "select u.iduser from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and m.statut = 'gagné' group by u.iduser, m.idmarche;";
+	    ResultSet rsGg = con.createStatement().executeQuery(gagnants);
+	    HashMap<Integer, Integer> ratioGagnants = new HashMap<Integer, Integer>();
+	    while (rsGg.next())
+	    {
+		int idusergg = rsGg.getInt("iduser");
+		int val = ratioGagnants.get(idusergg);
+		out.println(ratioGagnants.get(idusergg));
+		if (ratioGagnants.get(idusergg) == null)
+		{
+		    val = 0;
+		    out.println(val);
+		}
+		else
+		{
+		    val++;
+		    out.println(val);
+		}
+		ratioGagnants.put(idusergg, val);
+	    }
+	    String perdants = "select u.iduser from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and m.statut = 'perdu' group by u.iduser, m.idmarche;";
+	    ResultSet rsPerdants = con.createStatement().executeQuery(perdants);
+	    HashMap<Integer, Integer> ratioPerdants = new HashMap<Integer, Integer>();
+	    while (rsPerdants.next())
+	    {
+		int iduserlose = rsPerdants.getInt("iduser");
+		int val = ratioPerdants.get(iduserlose);
+		if (ratioPerdants.get(iduserlose) == null)
+		    val = 0;
+		else
+		    val++;
+		ratioPerdants.put(iduserlose, val);
+	    }
+	    ArrayList<Integer> admins = new ArrayList<Integer>();
+	    for (Integer clegg : ratioGagnants.keySet())
+	    {
+		if (ratioPerdants.containsKey(clegg))
+		{
+		    for (Integer clelose : ratioPerdants.keySet())
+		    {
+			if (ratioGagnants.get(clegg) / ratioPerdants.get(clelose) > 1)
+			{
+			    admins.add(clegg);
+			}
+		    }
+		}
+		else
+		{
+		    admins.add(clegg);
+		}
+	    }
+	    Iterator it = admins.iterator();
+	    while(it.hasNext())
+	    {
+		con.createStatement().executeUpdate("update utilisateur set droit = 'administrateur' where iduser = '"+it.next()+"' ;");
+	    }
+	    */
 	    res.sendRedirect(req.getContextPath()+"/admin/gererMarche.jsp");
 	}
 	catch (Exception e)

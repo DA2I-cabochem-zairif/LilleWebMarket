@@ -13,7 +13,7 @@
 	<br />
 	<p><input type="submit" value="Connexion">
 	<input type="reset"></p>
-	<p>Vous n'avez pas de compte ? <a href="creerLogin.jsp">Inscrivez-vous</a></p>
+	<p>Vous n'avez pas de compte ? <a href="../creerLogin.jsp">Inscrivez-vous</a></p>
       </form>
       </div>
     </article>

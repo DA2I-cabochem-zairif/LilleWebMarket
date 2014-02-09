@@ -6,10 +6,10 @@
 	    maxActive="8" 
 	    maxIdle="4" 
 	    maxWait="10000"
-	    username="maxime" 
+	    username="fouad" 
 	    password="moi" 
 	    driverClassName="org.postgresql.Driver"
-	    url="jdbc:postgresql://localhost/maxime" 
+	    url="jdbc:postgresql://localhost/da2i" 
 	/>
 
 	<Realm

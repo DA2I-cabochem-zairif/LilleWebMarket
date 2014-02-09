@@ -14,10 +14,6 @@
     	Context envCtx  = (Context) initCtx.lookup("java:comp/env");
     	DataSource ds   = (DataSource) envCtx.lookup("madb");
     	con = ds.getConnection();
-	     // String url = getServletContext().getInitParameter("url");
-	     // String user = getServletContext().getInitParameter("user");
-	     // String mdp = getServletContext().getInitParameter("mdp");
-	     // Connection con = DriverManager.getConnection(url,user, mdp);
 	     Statement state = con.createStatement();
 	     String iddemande = request.getParameter("marche");
 	     String query = "select u.iduser, u.login, m.idmarche, m.inverse, 100 - av.prix as prixinverse, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = ? and t.description = 'achat' group by u.iduser, u.login, m.idmarche, m.inverse, prixinverse, t.description order by prixinverse desc;";
@@ -28,7 +24,6 @@
 	     %>
 		 <div id="jqplot"></div>
 		  <h1>Vendeurs : </h1>
-		  <p>Cash : <%= session.getAttribute("cash") %></p>
 		  <table><tr>
 	    <%
 	    ResultSetMetaData rsmd = rs.getMetaData();

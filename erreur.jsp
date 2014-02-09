@@ -13,7 +13,7 @@
 	    if (exception!=null) out.print(exception.getMessage());
         %>
         est survenu.</p>
-        <p><a href="#" alt="retour a l'accueil">Retour</a></p>
+        <p><a href="<%= request.getContextPath() %>/users/index.jsp" alt="retour a l'accueil">Retour</a></p>
     </div>
     
 </article>

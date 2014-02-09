@@ -109,6 +109,13 @@ insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Au UR l
 
 insert into titre values (default, 1, default, default);
 insert into titre values (default, 1, default, default);
+insert into titre values (default, 1, default, '2014-02-05');
+insert into titre values (default, 1, default, '2014-02-04');
+insert into titre values (default, 1, default, '2014-02-03');
+insert into titre values (default, 1, default, '2014-02-02');
+insert into titre values (default, 1, default, '2014-02-01');
+insert into titre values (default, 1, default, '2014-01-31');
+
 insert into titre values (default, 2, default, default);
 insert into titre values (default, 2, default, default);
 
@@ -116,9 +123,24 @@ insert into achatvente values (default, 47, 61, 1);
 insert into achatvente values (default, 49, 5, 1);
 insert into achatvente values (default, 44, 563, 1);
 
+insert into achatvente values (default, 12, 341, 1);
+insert into achatvente values (default, 42, 69, 1);
+insert into achatvente values (default, 31, 80, 1);
+insert into achatvente values (default, 78, 125, 1);
+insert into achatvente values (default, 59, 32, 1);
+insert into achatvente values (default, 26, 55, 1);
+
 insert into achatvente values (default, 36, 395, 2);
 
 insert into transactions values (default, 1, 1);
 insert into transactions values (default, 2, 2);
 insert into transactions values (default, 3, 3);
+
 insert into transactions values (default, 4, 4);
+
+insert into transactions values (default, 5, 5);
+insert into transactions values (default, 6, 6);
+insert into transactions values (default, 7, 7);
+insert into transactions values (default, 8, 8);
+insert into transactions values (default, 9, 9);
+insert into transactions values (default, 10, 10);

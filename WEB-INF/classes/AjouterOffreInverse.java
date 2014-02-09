@@ -27,18 +27,18 @@ public class AjouterOffreInverse extends HttpServlet
 	    int prix = Integer.parseInt(req.getParameter("prix"));
 	    int quantite = Integer.parseInt(req.getParameter("quantite"));
 	    int apayer = prix * quantite;
-	    int iduser = Integer.parseInt((String)session.getAttribute("iduser"));
+	    int iduser = (Integer)session.getAttribute("iduser");
 	    int cash = 0;
-	    PreparedStatement pscash = con.prepareStatement("select cash from utilisateur where iduser = ?;");
+	    PreparedStatement pscash = con.prepareStatement("select cash from utilisateur where iduser = ? ;");
 	    pscash.setInt(1, iduser);
 	    ResultSet rscash = pscash.executeQuery();
 	    rscash.next();
 	    cash = rscash.getInt("cash");
 	    int idmarche = Integer.parseInt(req.getParameter("idmarche"));
 	    boolean riche = apayer <= cash;
-	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche)
+	    if (req.getParameter("quantite").equals("") || req.getParameter("prix").equals("") || !riche || prix > 100)
 	    {
-		res.sendRedirect("SelectInfoMarcheInverse?marche="+req.getParameter("idmarche"));
+		res.sendRedirect("users/selectMarcheInverse.jsp?marche="+req.getParameter("idmarche"));
 	    }
 	    else
 	    {

@@ -1,4 +1,9 @@
 <%@page pageEncoding="utf-8" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*" %>
+<jsp:useBean id="p" class="beans.Personne" scope="request" />
+<% p.rechUser(request.getRemoteUser(), session); %>
 <!DOCTYPE html>
   <HTML lang="fr">
   <head>
@@ -18,7 +23,7 @@
     </header>
     <aside>
       <div class="infouser">
-          <img src="http://lorempixel.com/90/90/" alt="photo">
+          <!-- <img src="http://lorempixel.com/90/90/" alt="photo"> -->
           <div class="user">
             <p>Bienvenue</p>
             <p><em>${prenom} ${nom}</em></p>            
@@ -27,7 +32,7 @@
             </div>
             <ul>
               <li>Solde : ${cash}</li>
-              <li><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Mes titres <em>(50)</em></a></li>
+              <li><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Mes titres</a></li>
             </ul> 
             <p><a class="button" href="<%= request.getContextPath() %>/deconnexion.jsp">Se deconnecter</a></p>
 	    <!--<p><a href="<%= request.getContextPath() %>/users/etatTitres.jsp?user=${iduser}">Espace personnel</a></p>-->

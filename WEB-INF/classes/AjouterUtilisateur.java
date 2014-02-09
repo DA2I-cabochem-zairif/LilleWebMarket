@@ -30,7 +30,7 @@ public class AjouterUtilisateur extends HttpServlet
 	    String remdp = req.getParameter("remdp");
 	    if (nom.equals("") || prenom.equals("") || passwd.equals("") || remdp.equals("") || !passwd.equals(remdp))
 	    {
-		res.sendRedirect("creerLogin.jsp");
+		res.sendRedirect(req.getContextPath()+"/creerLogin.jsp");
 	    }
 	    else
 	    {
@@ -68,7 +68,7 @@ public class AjouterUtilisateur extends HttpServlet
 		ps.setString(4, passwd);
 		ps.executeUpdate();
 	    }
-	    res.sendRedirect("infosCompte.jsp");
+	    res.sendRedirect(req.getContextPath()+"/infosCompte.jsp");
 	}
 	catch (Exception e)
 	{

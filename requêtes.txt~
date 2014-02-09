@@ -24,6 +24,3 @@ select t.idtitre, t.iduser, t.description, av.idachatvente, av.prix, av.quantite
 
 Requête qui récupère les utilisateurs en fonction du marché dans lequel ils ont joué -> regroupé par description de titre
 select u.iduser, t.description, sum(av.quantite) as quantite from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and av.idmarche = 1 group by u.iduser, t.description;
-
-Requête qui récupère les user qui ont joué ou non dans un marché
-select u.iduser, m.idmarche from utilisateur u, titre t, transactions tr, achatvente av, marche m where t.iduser = u.iduser and tr.idtitre = t.idtitre and av.idachatvente = tr.idachatvente and av.idmarche = m.idmarche and m.statut = 'gagné' group by u.iduser, m.idmarche;

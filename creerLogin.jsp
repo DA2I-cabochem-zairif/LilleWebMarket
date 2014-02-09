@@ -10,7 +10,7 @@
 	<br />
 	<p><input type="submit" value="Créer">
 	<input type="reset"></p>
-	<p><a href="login.jsp">Revenir au formulaire de connexion</a></p>
+	<p><a href="users/index.jsp">Revenir au formulaire de connexion</a></p>
       </form>
 	</div>
 </article>

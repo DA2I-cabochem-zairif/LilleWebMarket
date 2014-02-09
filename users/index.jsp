@@ -2,7 +2,6 @@
 <%@ page errorPage="../erreur.jsp" %>
 <%@ page import="java.sql.*,javax.sql.*,javax.naming.*"%>
 <% session.setAttribute("page","Index"); %>
-
 <jsp:include page="../partial/header.jsp"/>
     <article>
       <div class="wrap">
@@ -10,15 +9,14 @@
         <p><a href='<%= request.getContextPath() %>/admin/gererMarche.jsp'>Gérer les marchés</a></p>
         <table>
           <%
-          	Connection con;
-	    	Class.forName(getServletContext().getInitParameter("driver"));
-	        Context initCtx = new InitialContext();
-	    	Context envCtx  = (Context) initCtx.lookup("java:comp/env");
-	    	DataSource ds   = (DataSource) envCtx.lookup("madb");
-	    	con = ds.getConnection();
-	    
-            PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
-         	ResultSet rs = ps.executeQuery();
+             Connection con;
+	     Class.forName(getServletContext().getInitParameter("driver"));
+	     Context initCtx = new InitialContext();
+	     Context envCtx  = (Context) initCtx.lookup("java:comp/env");
+	     DataSource ds   = (DataSource) envCtx.lookup("madb");
+	     con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement("select * from marche where statut = 'EN COURS';");
+             ResultSet rs = ps.executeQuery();
 	     %><h3>Liste des marchés :</h3><%
         while (rs.next())
         {
