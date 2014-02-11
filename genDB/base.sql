@@ -105,7 +105,7 @@ insert into utilisateur values (default, 'admin'  , 'admin' , 'admin'   , 'admin
 insert into utilisateur values (default, 'mm'     , 'mm'    , 'mm'      ,  'mm'  ,  0      ,'marketmaker');
 
 insert into marche values (default, 'Lille gagnera son prochain match', 'Lille fera match nul ou perdra son prochain match', '05-02-2014');
-insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Au UR le soir ça sera dégueu', '12-02-2014');
+insert into marche values (default, 'Au RU à midi ça sera mangeable', 'Sinon ce sera pas bon', '12-02-2014');
 
 insert into titre values (default, 1, default, default);
 insert into titre values (default, 1, default, default);
